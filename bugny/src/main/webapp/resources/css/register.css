@@ -1,0 +1,21 @@
+*{
+	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	color: black;
+	list-style: none;
+}
+
+.selectDiv{
+	text-align: center;
+}
+
+.form span.error { 
+	color:tomato; 
+	 }
+		
+
+
+
+

@@ -2,7 +2,7 @@ package com.kgggh.bugny.service;
 
 
 
-import java.sql.Date;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 	private UserDAO userDAO;
 	
 	@Override
-	public void register(UserDTO user) throws Exception {
-		userDAO.register(user);
+	public int register(UserDTO user) throws Exception {
+		return userDAO.register(user);
 
 	}
 	
@@ -28,16 +28,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int idCheck(String userId) throws Exception {
-		int result = userDAO.idCheck(userId);
-		return result;
+	public int idCheck(String id) throws Exception {
+		return userDAO.idCheck(id);
+		
 	}
 
 	@Override
-	public void loginDate(String logDate) throws Exception {
-		userDAO.logDate(logDate);
+	public void logTime(String logTime) throws Exception {
+		userDAO.logTime(logTime);
 		
 	}
+
+	@Override
+	public void userUpdate(UserDTO user)throws Exception {
+		userDAO.userUpdate(user);
+	}
+
 
 	
 

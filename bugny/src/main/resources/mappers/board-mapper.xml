@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+	<select id="countBoard" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			board
+	</select>
+	
+ 	<!-- 페이징 처리 후 게시글 조회 -->
+ 	
+	<select id="boardList" resultType="board">
+		SELECT
+			BOARD_IDX, ID, CATEGORY, TITLE, CONTENTS, HIT, LIKED, REGDATE
+		FROM 
+			BOARD
+	</select> 
+
+	
+	<!-- 게시글쓰기 -->
+	<insert id="boardCreate" parameterType="board" useGeneratedKeys="true" keyProperty="board_idx" >
+		INSERT INTO BOARD
+			(CATEGORY, TITLE, CONTENTS,ID,REGDATE)
+   		VALUES 
+   			(#{category}, #{title}, #{contents}, #{id}, NOW())
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<update id="boardUpdate" parameterType="board">
+		UPDATE board
+		SET
+			CATEGORY = #{category},
+			TITLE = #{title},
+			CONTENTS = #{contents}
+		WHERE 
+			BOARD_IDX = #{board_idx}
+	</update>	
+	
+	
+	<!--게시글 상세뷰 -->
+	<select id="boardDetail" resultType="board" parameterType="board" >
+		SELECT * 
+		FROM 
+			BOARD 
+		WHERE 
+			BOARD_IDX = #{board_idx}
+	</select>
+</mapper>

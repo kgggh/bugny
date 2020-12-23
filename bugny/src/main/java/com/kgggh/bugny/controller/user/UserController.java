@@ -2,14 +2,20 @@ package com.kgggh.bugny.controller.user;
 
 
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgggh.bugny.dto.UserDTO;
 import com.kgggh.bugny.service.UserService;
@@ -28,13 +34,37 @@ public class UserController {
 		return "user/register";
 	}
 	
+
 	@RequestMapping(value = "/register")
-	public String register(UserDTO user)throws Exception {
-		
-		userService.register(user);
-		logger.info("회원가입 성공");
-		System.out.println("회원가입 성공?");
-		return "redirect:/";
+	public String register(UserDTO user,Model model)throws Exception{
+		int cnt = userService.register(user);
+		if(cnt == -1) {
+			System.out.println(">>>>>>>>>result"+cnt);
+			logger.info("회원가입 실패");
+			model.addAttribute("msg","회원가입 실패");
+			model.addAttribute("url","/register");
+			
+		}else {
+			model.addAttribute("msg","회원가입 성공");
+			model.addAttribute("url","/loginPage");
+			logger.info("회원가입 성공");
+		}
+		return "redirect";
+	}
+	
+	// 아이디 중복 검사
+	@RequestMapping(value = "/idChk")
+	@ResponseBody 
+	public int idChk(@RequestParam ("id") String id) throws Exception{
+		logger.info("아이디 중복체크 진입");
+		System.out.println("id >>>>>"+ id);
+		int cnt = userService.idCheck(id);
+				if(cnt == -1) {
+					System.out.println("중복아이디 존재");
+				}else {
+					System.out.println("아이디 사용 가능");
+				}
+		return cnt;
 	}
 	
 	@RequestMapping("/loginPage")
@@ -47,38 +77,49 @@ public class UserController {
 	
 	
 	@RequestMapping("/login")
-	public String login(UserDTO user,HttpSession session)throws Exception {
-		
+	public String login(UserDTO user,HttpSession session,HttpServletResponse response)throws Exception {
 		UserDTO login = userService.login(user);
-		
 		if(login == null) {
 			logger.info("로그인 실패");
-			System.out.println("로그인 실패");
-			return "user/login";
-			
+			return"user/login";
 		}else {
-			logger.info("로그인 성공");
-			System.out.println("로그인 성공");
-			userService.loginDate(user.getId());
+			userService.logTime(user.getId());
 			session.setAttribute("user", login);
 		}
-		
-		return "redirect:/";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+        out.println("<script>alert('성공적으로 로그인 되었습니다.');</script>");
+        out.flush();
+		return "home";
 	}
+	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session)throws Exception {
 		session.invalidate();
-		System.out.println("로그아웃 성공");
-		return "redirect:/";
+		System.out.println("로그아웃");
+		return "redirect:/home";
 	}
 	
-	// 아이디 중복 검사
-	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
-	public String userIdCheckt(String id) throws Exception{
-		logger.info("memberIdChk() 진입");
-		int result = userService.idCheck(id);
-		logger.info("결과값 = " + result);
-		
-		return "";
+	@RequestMapping("/myPage")
+	public String myPage()throws Exception {
+		return "user/myPage";
 	}
+	
+	
+	@RequestMapping("/userUpdatePage")
+	public String userUpdatePage()throws Exception {
+		logger.info("회원정보수정페이지 진입");
+		return "user/user_Update.jsp";
+	}
+	@RequestMapping("/userUpdate")
+	public String userUpdate(UserDTO user, Model model) throws Exception {
+		 userService.userUpdate(user);
+		 model.addAttribute("msg","수정 완료");
+		 model.addAttribute("url","/home");
+		
+		return "redirect";
+	}
+	
+	
+
 }

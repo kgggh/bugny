@@ -1,6 +1,6 @@
 package com.kgggh.bugny.dao;
 
-import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ public class UserDAOImpl implements UserDAO {
 	SqlSession sql;
 	
 	@Override
-	public void register(UserDTO user) throws Exception {
-		sql.insert("user.register",user);
+	public int register(UserDTO user) throws Exception {
+		return sql.insert("user.register",user);
 	}
 
 	@Override
@@ -25,15 +25,20 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public int idCheck(String userId) throws Exception {
-		int result = sql.selectOne("user.idCheck",userId);
-		return result;
+	public int idCheck(String id) throws Exception {
+		 return sql.selectOne("user.idCheck",id);
+		
 	}
 
 	@Override
-	public void logDate(String logDate) throws Exception {
-		sql.update("user.logDate",logDate);
+	public void logTime(String logTime) throws Exception {
+		sql.update("user.logTime",logTime);
 		
+	}
+
+	@Override
+	public void userUpdate(UserDTO user) {
+		sql.update("user.userUpdate",user);
 	}
 
 	

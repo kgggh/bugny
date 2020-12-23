@@ -7,8 +7,10 @@
 	
 	<insert id="register" parameterType="user">
 	
-		INSERT INTO USER(ID, PASSWORD, NAME, BIRTH,EMAIL,ADDRESS,PHONE,REG,LOGDATE)
-		VALUES (#{id}, #{password}, #{name}, #{birth},#{email},#{address},#{phone},SYSDATE(),NOW())
+		INSERT INTO USER
+			(ID, PASSWORD, NAME, BIRTH,EMAIL,ADDRESS,PHONE,REG,LOGTIME)
+		VALUES 
+			(#{id}, #{password}, #{name}, #{birth},#{email},#{address},#{phone},SYSDATE(),NOW())
 	</insert>
 
 	<select id="login" resultType="user" parameterType="user">
@@ -22,9 +24,19 @@
 		WHERE ID = #{id}
 	</select>
 	
-	<update id="logDate">
+	<update id="logTime">
 		UPDATE USER 	
-		SET LOGDATE = NOW()
+			SET LOGTIME = NOW()
 		WHERE ID = #{id}
 	</update>
+	
+	<update id="userUpdate">
+		UPDATE USER
+			SET
+				PASSWORD = #{password},
+				EMAIL = #{email},
+				ADDRESS = #{address},
+				PHONE = #{phone}
+		WHERE ID = #{id}
+	</update>	
 </mapper>

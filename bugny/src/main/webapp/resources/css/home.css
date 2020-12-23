@@ -1,0 +1,142 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+}
+.nav_logo > a{
+     color: moccasin;
+     padding-left: 8px;
+}
+
+span {
+    font-size: 35px;
+}
+
+
+a {
+    text-align: center;
+    color: gray;
+    text-decoration: none;
+    font-size: 1.2em;
+    
+}
+
+.container{
+	width: 100%;
+}
+.header {
+	height: 100px;
+}
+
+.aside{
+	float: left;
+}
+
+.navBar {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color:black;
+    padding-top: 8px;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    
+}
+
+.nav_logo{
+    font-size: 40px;
+}
+
+.nav_menu {
+    list-style: none;
+    display: flex;
+    border-radius: 5px;
+    background-color: black;
+    padding-left: 0px;
+}
+
+.nav_menu > a {
+    padding: 1vw 5vw;
+    border-radius: 5px;
+    font-size: 15px;
+}
+    
+
+.nav_menu a:hover {
+    background-color:sienna;
+    -webkit-transform: scale(1.2,1.2);
+    -moz-transform: scale(1.2,1.2);
+    -o-transform: scale(1.2,1.2);
+    -ms-transform: scale(1.2,1.2);
+    transform: scale(1.2,1.2);
+}
+
+.nav_menu a:hover {
+    
+    color:white;
+}
+.nav_icons {
+	list-style: none;
+}
+
+.nav_toggleBtn {
+    position: absolute;
+    right: 8px;      
+    font-size: 32px;
+    display: none;
+    
+}
+
+@media screen and (max-width:768px){
+    .back_home{
+        background-size: contain;
+        height: 980px;
+        width: 100%;
+        
+    }
+
+    .navBar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 0px;
+        padding-right: 0px;
+        
+    }
+
+    .nav_menu {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        display: none;
+    }
+    
+    .nav_menu a {
+        width: 100%;
+        text-align: center;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-size: 24px;
+        
+        
+    }
+    .nav_icons {
+        justify-content: center;
+        width: 100%;
+        display: none;
+    }
+    .nav_toggleBtn {
+        display: block;
+        color: gray;
+    }
+   
+    .nav_menu.active,
+    .nav_icons.active{
+        display: flex;
+    }
+    
+    
+    
+}

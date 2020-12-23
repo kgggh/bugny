@@ -5,11 +5,14 @@
 <configuration>
   <typeAliases>
   		<typeAlias alias="user" type="com.kgggh.bugny.dto.UserDTO"/>
+  		<typeAlias alias="board" type="com.kgggh.bugny.dto.BoardDTO"/>
   </typeAliases>
   
   <mappers>
   		<mapper resource="mappers/user-mapper.xml"/>
+  		<mapper resource="mappers/board-mapper.xml"/>
   </mappers>
+  
 </configuration>
 
 

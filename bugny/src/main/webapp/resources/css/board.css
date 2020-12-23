@@ -1,0 +1,31 @@
+*{
+	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	color: black;
+	list-style: none;
+}
+.col-md-12{
+	margin: 0px;
+}
+#search{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+#btn{
+	padding-bottom: 8px;
+}
+
+.selectBtn{
+	text-align: center;
+	
+}
+
+
+.container{
+	width: 100%;
+}
+.text-center{
+	margin-top: 30px;
+}
