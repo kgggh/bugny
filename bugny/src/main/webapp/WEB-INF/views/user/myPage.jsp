@@ -25,30 +25,15 @@
 			<h3 class="text-center text-muted">
 				마이페이지
 			</h3>
-			<form role="form" action="login" method="post">
-				<div class="form-group">
-					 
-					<label for="exampleInputEmail1">
-						아이디
-					</label>
-					<input type="text" name="id" placeholder="아이디를 입력해 주세요." class="form-control" id="id" />
-				</div>
-				<div class="form-group">
-					 
-					<label for="exampleInputPassword1">
-						비밀번호
-					</label>
-					<input type="password" name="password" placeholder="비밀번호를 입력해 주세요." class="form-control" id="password" />
-				</div>
-				<div class="selectBtn">
-				<button type="submit" class="btn btn-primary " id="login">
-					로그인
-				</button>
-				<button type="button" class="btn btn-primary " id="register">
-					회원가입
-				</button>
-				</div>
-			</form>
+			<p>${user.id }님 환영합니다.</p>
+			<p>최근 접속일 : <fmt:formatDate value="${user.logTime }" type="Date" pattern="yyyy-MM dd:hh:mm"/> </p>
+			<p>내가 쓴글</p>
+			<p>추천 누른 글</p>
+			<p>추천 누른 음악</p>
+			<button value="회원정보수정">
+				
+			</button>
+			
 		</div>
 	</div>
 </div>

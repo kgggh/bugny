@@ -6,13 +6,13 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>음악</title>
+	<title>음악듣기</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
-	<script src="<c:url value="/resources/js/board.js" />"></script>
+	<script src="<c:url value="/resources/js/music.js" />"></script>
     <script type="text/javascript">
    
     </script>
@@ -22,8 +22,8 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="text-center ">
-				음악 top100
+			<h3 class="text-center text-muted">
+				이 노래 모르면 간첩!
 			</h3>
 			<div class="form-group row justify-content-end" id="search">
 				<div class="w100" style="padding-right:10px">
@@ -37,7 +37,7 @@
 					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
 				</div>
 				<div>
-					<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+					<button class="btn btn-sm btn-secondary" name="btnSearch" id="btnSearch">검색</button>
 				</div>
 			</div>
 			
@@ -70,36 +70,10 @@
 				</tbody>
 			</table>
 			<div class="justify-content-end" align="right" id="btn">
-				<button type="button" class="btn btn-md btn-secondary pull-right" id="boardWriteP">
-					글작성
+				<button type="button" class="btn btn-md btn-secondary pull-right" id="musicWriteP">
+					노래등록
 				</button>
 			</div>
-			
-			<nav>
-				<ul class="pagination nav justify-content-center ">
-					<li class="page-item">
-						<a class="page-link" href="#">Previous</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">1</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">2</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">3</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">4</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">5</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">Next</a>
-					</li>
-				</ul>
-			</nav> 
 		</div>
 	</div>
 </div>

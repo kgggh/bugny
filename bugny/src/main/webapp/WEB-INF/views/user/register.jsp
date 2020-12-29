@@ -12,37 +12,37 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="resources/js/validate.js"></script>
+	<script type="text/javascript" src="resources/js/validate.js"></script> 
+	<script type="text/javascript" src="resources/js/user.js"></script> 
 	<script type="text/javascript" src="resources/js/jquery.validate.min.js"></script>
-	
-		
 </head>
 <body>
-<div class="container" style="margin-top: 50px; width: 500px">
+<div class="container " style="margin-top: 50px; width: 500px">
 	<div class="row">
 		<div class="col-md-12 ">
 			<h3 class="text-center text-muted">
 				회원가입
 			</h3>
-			<form role="form" action="register" class="form">
+			<form role="form" action="register" class="form" method="post">
 				<div class="form-group">
-					<label for="id" >아이디</label>
+					<label for="id" >* 아이디</label>
 					<input type="text" name="id" id="id" placeholder="아이디를 입력해 주세요." class="form-control"/>
 				</div>
+				<div class="check_font" id="idCheck"></div>
 				<div class="form-group">
-					<label for="password">비밀번호</label>
+					<label for="password">* 비밀번호</label>
 					<input type="password" name="password" id="password" placeholder="비밀번호를 입력해 주세요." class="form-control" />
 				</div>
 				<div class="form-group">
-					<label for="name">이름</label>
+					<label for="name">* 이름</label>
 					<input type="text" name="name" id="name"  placeholder="이름을 입력해 주세요." class="form-control" />
 				</div>
 				<div class="form-group">
-					<label for="birth">생년월일</label>
+					<label for="birth">* 생년월일</label>
 					<input type="text" name="birth" id="birth" placeholder="생년월일을 입력해 주세요." class="form-control" />
 				</div>
 				<div class="form-group">
-					<label for="email">이메일</label>
+					<label for="email">* 이메일</label>
 					<input type="text" name="email"id="email"  placeholder="이메일을 입력해 주세요." class="form-control" />
 				</div>
 				<div class="form-group">

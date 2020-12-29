@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void logTime(String logTime) throws Exception {
-		userDAO.logTime(logTime);
+	public void logTime(String id) throws Exception {
+		userDAO.logTime(id);
 		
 	}
 

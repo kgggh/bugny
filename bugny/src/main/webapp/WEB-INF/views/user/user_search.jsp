@@ -17,9 +17,7 @@
 	  	  $("#register").on("click", function(){
 	  	    location.href = 'registerPage';
 	  	  });  
-	  	
 	  	});
-		
 
 	</script>
 	
@@ -40,7 +38,6 @@
 						아이디
 					</label>
 					<input type="text" name="id" placeholder="아이디를 입력해 주세요." class="form-control" id="id" required/>
-					<div class="check_font" id="id_check"></div>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">
@@ -48,7 +45,6 @@
 					</label>
 					<input type="password" name="password" placeholder="비밀번호를 입력해 주세요." class="form-control" id="password" required/>
 				</div>
-				<div class="check_font" id="id_password"></div>
 				<div class="interval_height a_none">
 					<a href="${pageContext.request.contextPath}/user/userSearch">&nbsp; 아이디 / 비밀번호 찾기</a>
 				</div>

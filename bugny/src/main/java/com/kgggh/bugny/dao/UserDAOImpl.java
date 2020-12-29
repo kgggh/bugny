@@ -1,6 +1,5 @@
 package com.kgggh.bugny.dao;
 
-import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +30,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void logTime(String logTime) throws Exception {
-		sql.update("user.logTime",logTime);
+	public void logTime(String id) throws Exception {
+		sql.update("user.logTime",id);
 		
 	}
 

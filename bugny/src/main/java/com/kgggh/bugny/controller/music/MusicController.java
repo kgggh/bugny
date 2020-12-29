@@ -16,6 +16,16 @@ public class MusicController {
 		log.info("음악 메뉴 진입");
 		return "music/music";
 	}
+	@RequestMapping("/musicWriteP")
+	public String musicWritePage() {
+		log.info("노래 등록 페이지");
+		return "music/music_write";
+	}
+	@RequestMapping("/musicReq")
+	public String musicRequest() {
+		log.info("노래 요청 페이지");
+		return "music/music_request";
+	}
 	
 	
 	

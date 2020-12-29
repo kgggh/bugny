@@ -2,7 +2,6 @@ package com.kgggh.bugny.controller.user;
 
 
 
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgggh.bugny.dto.UserDTO;
 import com.kgggh.bugny.service.UserService;
+import com.kgggh.bugny.util.AES256Util;
 
 
 @Controller
@@ -37,34 +37,21 @@ public class UserController {
 
 	@RequestMapping(value = "/register")
 	public String register(UserDTO user,Model model)throws Exception{
-		int cnt = userService.register(user);
-		if(cnt == -1) {
-			System.out.println(">>>>>>>>>result"+cnt);
-			logger.info("회원가입 실패");
-			model.addAttribute("msg","회원가입 실패");
-			model.addAttribute("url","/register");
-			
-		}else {
-			model.addAttribute("msg","회원가입 성공");
-			model.addAttribute("url","/loginPage");
-			logger.info("회원가입 성공");
-		}
+		logger.info("회원가입 성공");
+		String encryptPw = AES256Util.encrypt(user.getPassword()); //aes256 암호화
+		user.setPassword(encryptPw);
+		userService.register(user);
+		model.addAttribute("msg","회원가입 성공");
+		model.addAttribute("url","/loginPage");
+	
 		return "redirect";
 	}
 	
 	// 아이디 중복 검사
-	@RequestMapping(value = "/idChk")
+	@RequestMapping(value = "/user/idCheck", method = RequestMethod.GET)
 	@ResponseBody 
-	public int idChk(@RequestParam ("id") String id) throws Exception{
-		logger.info("아이디 중복체크 진입");
-		System.out.println("id >>>>>"+ id);
-		int cnt = userService.idCheck(id);
-				if(cnt == -1) {
-					System.out.println("중복아이디 존재");
-				}else {
-					System.out.println("아이디 사용 가능");
-				}
-		return cnt;
+	public int idCheck(@RequestParam ("id") String id) throws Exception{
+		return userService.idCheck(id);
 	}
 	
 	@RequestMapping("/loginPage")
@@ -77,20 +64,25 @@ public class UserController {
 	
 	
 	@RequestMapping("/login")
-	public String login(UserDTO user,HttpSession session,HttpServletResponse response)throws Exception {
+	public String login(UserDTO user,Model model,HttpSession session)throws Exception {
+		String encryptPw = AES256Util.encrypt(user.getPassword()); //aes256 암호화
+		user.setPassword(encryptPw);
 		UserDTO login = userService.login(user);
-		if(login == null) {
-			logger.info("로그인 실패");
-			return"user/login";
+		if (login == null) {
+			model.addAttribute("msg","아이디 비밀번호를 확인해주세요.");
+			model.addAttribute("url","/loginPage");
+			return "redirect";
 		}else {
-			userService.logTime(user.getId());
+			userService.logTime(login.getId());
 			session.setAttribute("user", login);
 		}
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-        out.println("<script>alert('성공적으로 로그인 되었습니다.');</script>");
-        out.flush();
 		return "home";
+	}
+	
+	@RequestMapping("/userSearch")
+	public String userSearch(HttpSession session)throws Exception {
+		logger.info("id/pw찾기");
+		return "user/user_search";
 	}
 	
 	@RequestMapping("/logout")
@@ -101,7 +93,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/myPage")
-	public String myPage()throws Exception {
+	public String myPage(UserDTO user)throws Exception {
 		return "user/myPage";
 	}
 	
@@ -109,13 +101,15 @@ public class UserController {
 	@RequestMapping("/userUpdatePage")
 	public String userUpdatePage()throws Exception {
 		logger.info("회원정보수정페이지 진입");
-		return "user/user_Update.jsp";
+		return "user/user_update";
 	}
+	
 	@RequestMapping("/userUpdate")
 	public String userUpdate(UserDTO user, Model model) throws Exception {
-		 userService.userUpdate(user);
-		 model.addAttribute("msg","수정 완료");
-		 model.addAttribute("url","/home");
+		logger.info("회원정보수정");
+		userService.userUpdate(user);
+		model.addAttribute("msg","수정 완료");
+		model.addAttribute("url","/home");
 		
 		return "redirect";
 	}

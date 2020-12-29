@@ -23,6 +23,7 @@ public class AES256Util {
         byte[] encrypted = cipher.doFinal(padded.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(encrypted);
     }
+    
     //복호화
     public static String decrypt(String data) throws Exception {
         Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding", "SunJCE");

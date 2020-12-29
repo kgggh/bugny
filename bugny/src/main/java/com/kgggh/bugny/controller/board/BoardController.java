@@ -32,6 +32,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardPage", method = RequestMethod.GET)
 	public String boardList(Model model,BoardDTO board) throws Exception {
+		log.info("게시판 페이지");
 		model.addAttribute("boardList",boardService.boardList(board));
 		return "board/board_list";
 	}
@@ -39,6 +40,7 @@ public class BoardController {
 	//글쓰기페이지
 	@RequestMapping("/boardWriteP")
 	public String board_writePage() {
+		log.info("게시글쓰기 페이지");
 		return "board/board_write";
 	}
 	
@@ -55,6 +57,7 @@ public class BoardController {
 	//글수정페이지
 		@RequestMapping("/boardUpdateP")
 		public String board_UpdatePage(Model model,BoardDTO board) throws Exception {
+			log.info("게시글수정 페이지");
 			board = boardService.boardDetail(board);
 			model.addAttribute("boardUpdate",board);
 			return "board/board_update";
@@ -71,6 +74,7 @@ public class BoardController {
 	//글상세페이지
 	@RequestMapping("/boardDetail")
 	public String boardDetail(BoardDTO board,@RequestParam("board_idx")int board_idx,Model model) throws Exception {
+		log.info("게시글상세 페이지");
 		board = boardService.boardDetail(board);
 		model.addAttribute("boardDetail",board);
 		return "board/board_detail";

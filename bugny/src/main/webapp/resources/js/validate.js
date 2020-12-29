@@ -2,11 +2,6 @@ $(function(){
 			$(".form").validate({
 				//규칙
 				rules:{
-					id:{
-						required : true, //필수입력여부
-						minlength : 6	//최소 입력 글자수
-					},
-					
 					name:{
 						required : true //필수입력여부
 					},
@@ -32,10 +27,6 @@ $(function(){
 
 				//메시지
 				messages:{
-					id:{
-						required : "아이디를 입력해 주세요.",
-						minlength : "최소 6글자 이상 입력해주세요."
-					},
 					name:{
 						required : "이름을 입력해 주세요."
 					},
@@ -46,7 +37,6 @@ $(function(){
 						maxlength : ("비밀번호는 16자 이하 입력해 주세요")
 						
 					},
-					
 					email: {
 						required : "이메일은 필수 입력입니다.",
 						email : "이메일 형식을 지켜주세요.EX)aa@naver.com" 

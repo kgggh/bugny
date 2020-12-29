@@ -8,6 +8,7 @@ public class SHA256Util {
 	public static String encryptSHA256(String sha256) {
 		return encrypt(sha256, "SHA-256");
 	}
+	
 	//SHA-256 암호화
 	public static String encrypt(String sha256, String messageDigest) {
 		try {

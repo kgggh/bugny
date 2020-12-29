@@ -5,7 +5,8 @@
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시판</title>
+
+	<title>음악</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -13,41 +14,42 @@
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="<c:url value="/resources/js/board.js" />"></script>
     <script type="text/javascript">
+   
     </script>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
-<div class="container-fluid" style="margin-top: 50px;">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="text-center text-muted ">
-				자유게시판
+			<h3 class="text-center text-muted">
+				관리자님 노래 요청 드려요!
 			</h3>
 			<div class="form-group row justify-content-end" id="search">
 				<div class="w100" style="padding-right:10px">
 					<select class="form-control form-control-sm" name="searchType" id="searchType">
+						<option value="album">앨범</option>
 						<option value="title">제목</option>
-						<option value="Content">내용</option>
-						<option value="reg_id">작성자</option>
+						<option value="singer">가수</option>
 					</select>
 				</div>
 				<div class="w300" style="padding-right:10px">
 					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
 				</div>
 				<div>
-					<button class="btn btn-sm btn-secondary " name="btnSearch" id="btnSearch">검색</button>
+					<button class="btn btn-sm btn-secondary" name="btnSearch" id="btnSearch">검색</button>
 				</div>
 			</div>
 			
 			<table class="table table-hover text-center">
 				<thead>
 						<tr> 
-							<th style="width: 10%">No</th>
-							<th style="width: 5%">카테고리</th>
-							<th style="width: 50%">제목</th>
-							<th style="width: 5%">작성자</th>
-							<th style="width: 20%">작성일</th>
-							<th style="width: 10%">조회수</th>
+							<th style="width: 10%">순위</th>
+							<th style="width: 10%">앨범</th>
+							<th style="width: 5%">제목</th>
+							<th style="width: 50%">가수</th>
+							<th style="width: 5%">좋아요</th>
+							<th style="width: 10%">재생수</th>
 						</tr>
 				</thead>
 				<tbody>
@@ -55,12 +57,12 @@
 					<c:if test="${not empty boardList }">
 						<c:forEach var="board" items="${boardList }">
 							<tr>
-								<td>${board.board_idx }</td>
-								<td>${board.category }</td>	
-								<td><a href="boardDetail?board_idx=<c:out value="${board.board_idx }"/>" >${board.title }</a></td>
-								<td>${board.id }</td>
-								<td>${board.regdate }</td>
-								<td>${board.hit }</td>
+								<td>1</td>
+								<td>앨범커버</td>	
+								<td>거짓말</td>
+								<td>빅뱅</td>
+								<td>0</td>
+								<td>154</td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -72,34 +74,32 @@
 					글작성
 				</button>
 			</div>
-			<div>
-			  <ul class="pagination">
-			    <li class="page-item disabled">
-			      <a class="page-link" href="#">&laquo;</a>
-			    </li>
-			    <li class="page-item active">
-			      <a class="page-link" href="#">1</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">2</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">3</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">4</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">5</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">&raquo;</a>
-			    </li>
-			  </ul>
-			</div>
 			
-
-			
+			<nav>
+				<ul class="pagination nav justify-content-center ">
+					<li class="page-item">
+						<a class="page-link" href="#">Previous</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">1</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">2</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">4</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">5</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">Next</a>
+					</li>
+				</ul>
+			</nav> 
 		</div>
 	</div>
 </div>

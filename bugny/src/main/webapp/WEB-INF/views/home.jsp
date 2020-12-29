@@ -11,6 +11,8 @@
 </head>
 <body>
 <%@include file="./common/header.jsp" %>
-
+<p>오늘의 노래추천</p>
+<p>오늘의 </p>
+<p>오늘의 노래추천</p>
 </body>
 </html>
