@@ -11,10 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MusicController {
 	private static final Logger log = LoggerFactory.getLogger(MusicController.class);
 	
-	@RequestMapping("/musicPage")
-	public String musicPage() {
-		log.info("음악 메뉴 진입");
-		return "music/music";
+	@RequestMapping("/musicNewest")
+	public String musicNewest() {
+		log.info("최신음악 진입");
+		return "music/music_newest";
+	}
+	@RequestMapping("/musicTop100")
+	public String musicTop100() {
+		log.info("뮤직 top100 진입");
+		return "music/music_Top";
 	}
 	@RequestMapping("/musicWriteP")
 	public String musicWritePage() {

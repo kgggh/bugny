@@ -16,48 +16,53 @@
 	<link rel="stylesheet" href="<c:url value='/resources/css/header.css'/>" >
 	
 </head>
-<body>
+<body >
 <!-- 상단 메뉴바{s} -->
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
-	<a class="navbar-brand" href="home">Bugny</a>
-	 <div class="collapse navbar-collapse" id="navDiv">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item">
-			  <a class="nav-link" href="musicTop100">음악 Top100</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="musicNewest">최신 음악</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="musicReq">음악 요청</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="boardPage">추천하는 카페</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="boardPage">자유게시판</a>
-			</li>
-	    </ul>
-	    <ul class="nav navbar-nav ml-auto navbar-right">
-	    <c:if test="${empty user }">
-			<li class="nav-item">
-				<a class="nav-link" href="loginPage">로그인</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="registerPage">회원가입</a>
-			</li>
-	    </c:if>
-	    <c:if test="${not empty user }">
-			<li class="nav-item">
-				<a class="nav-link" href="logout">로그아웃</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="myPage">마이페이지</a>
-			</li>
-	    </c:if>
-	    </ul>
-	</div>
-</nav>
+	<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" id="navbar">
+		<a class="navbar-brand" href="home">Bugny</a>
+		 <div class="collapse navbar-collapse" id="navDiv">
+			<ul class="navbar-nav  mr-auto">
+				<li class="nav-item">
+				  <a class="nav-link" href="musicTop100">음악 Top100</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="musicNewest">최신음악</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="musicReq">음악요청</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="recomCafe">추천카페(업뎃중)</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="boardPage">자유게시판(구현)</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="liveChat">라이브채팅</a>
+				</li>
+		    </ul>
+		    <ul class="nav navbar-nav ml-auto navbar-right">
+		    <c:if test="${empty user }">
+				<li class="nav-item">
+					<a class="nav-link" href="loginPage">로그인</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="registerPage">회원가입</a>
+				</li>
+		    </c:if>
+		    <c:if test="${not empty user }">
+				<li class="nav-item">
+					<a class="nav-link" href="logout">로그아웃</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="myPage">마이페이지</a>
+				</li>
+		    </c:if>
+		    </ul>
+		</div>
+	</nav>
+<div>
+</div>
 </body>
 </html>
 

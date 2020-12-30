@@ -6,7 +6,7 @@ public class UserDTO {
 	    private String id; // 아이디 
 	    private String password; //비밀번호
 	    private String name; //이름 
-	    private Date birth; //생일 
+	    private String birth; //생일 
 	    private String email; // 이메일 
 	    private String address; // 주소 
 	    private String phone; // 핸드폰 
@@ -47,12 +47,12 @@ public class UserDTO {
 		}
 
 
-		public Date getBirth() {
+		public String getBirth() {
 			return birth;
 		}
 
 
-		public void setBirth(Date birth) {
+		public void setBirth(String birth) {
 			this.birth = birth;
 		}
 

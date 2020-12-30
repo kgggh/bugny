@@ -39,6 +39,12 @@
 		WHERE 
 			BOARD_IDX = #{board_idx}
 	</update>	
+	<delete id="boardDelete">
+		DELETE 
+			FROM BOARD
+		WHERE 
+			BOARD_IDX = #{board_idx}
+	</delete>
 	
 	
 	<!--게시글 상세뷰 -->

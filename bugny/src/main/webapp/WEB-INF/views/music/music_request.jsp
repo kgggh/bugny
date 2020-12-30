@@ -13,9 +13,12 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="<c:url value="/resources/js/board.js" />"></script>
-    <script type="text/javascript">
-   
-    </script>
+	<link rel="stylesheet" href="<c:url value='/resources/css/music.css'/>" >
+    <style type="text/css">
+		body{
+			padding-top: 150px;	
+		}
+	</style>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
@@ -25,56 +28,13 @@
 			<h3 class="text-center text-muted">
 				관리자님 노래 요청 드려요!
 			</h3>
-			<div class="form-group row justify-content-end" id="search">
-				<div class="w100" style="padding-right:10px">
-					<select class="form-control form-control-sm" name="searchType" id="searchType">
-						<option value="album">앨범</option>
-						<option value="title">제목</option>
-						<option value="singer">가수</option>
-					</select>
-				</div>
-				<div class="w300" style="padding-right:10px">
-					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
-				</div>
-				<div>
-					<button class="btn btn-sm btn-secondary" name="btnSearch" id="btnSearch">검색</button>
-				</div>
-			</div>
-			
 			<table class="table table-hover text-center">
-				<thead>
-						<tr> 
-							<th style="width: 10%">순위</th>
-							<th style="width: 10%">앨범</th>
-							<th style="width: 5%">제목</th>
-							<th style="width: 50%">가수</th>
-							<th style="width: 5%">좋아요</th>
-							<th style="width: 10%">재생수</th>
-						</tr>
-				</thead>
 				<tbody>
-					<tr>
-					<c:if test="${not empty boardList }">
-						<c:forEach var="board" items="${boardList }">
-							<tr>
-								<td>1</td>
-								<td>앨범커버</td>	
-								<td>거짓말</td>
-								<td>빅뱅</td>
-								<td>0</td>
-								<td>154</td>
-							</tr>
-						</c:forEach>
-					</c:if>
+					<tr> 
+						<td>노래청요청</td>
 					</tr>
 				</tbody>
 			</table>
-			<div class="justify-content-end" align="right" id="btn">
-				<button type="button" class="btn btn-md btn-secondary pull-right" id="boardWriteP">
-					글작성
-				</button>
-			</div>
-			
 			<nav>
 				<ul class="pagination nav justify-content-center ">
 					<li class="page-item">

@@ -6,12 +6,12 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>음악등록</title>
+	<title>음악듣기</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
+	<link rel="stylesheet" type="text/css"href="resources/css/music.css">
 	<script src="<c:url value="/resources/js/music.js" />"></script>
     <style type="text/css">
 		body{
@@ -19,13 +19,13 @@
 		}
 	</style>
 </head>
-<body>
 <%@include file="../common/header.jsp" %>
+<body>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center text-muted">
-				음악등록
+				이 노래 모르면 간첩!
 			</h3>
 			<div class="form-group row justify-content-end" id="search">
 				<div class="w100" style="padding-right:10px">
@@ -72,6 +72,7 @@
 				</tbody>
 			</table>
 			<div class="justify-content-end" align="right" id="btn">
+		
 				<button type="button" class="btn btn-md btn-secondary pull-right" id="musicWriteP">
 					노래등록
 				</button>

@@ -61,7 +61,7 @@ public class BoardController {
 			board = boardService.boardDetail(board);
 			model.addAttribute("boardUpdate",board);
 			return "board/board_update";
-		}
+			}
 		
 	//글수정
 	@RequestMapping("/boardUpdate")
@@ -70,6 +70,13 @@ public class BoardController {
 		System.out.println(">>>>>>>>board" + board);
 		return "redirect:/boardPage";
 	}
+	
+	//글삭제
+	@RequestMapping("/boardDelete")
+	public String boardDelete(@RequestParam("board_idx") int board_idx,Model model) throws Exception {
+		boardService.boardDelete(board_idx);
+		return "redirect:/boardPage";
+		}
 	
 	//글상세페이지
 	@RequestMapping("/boardDetail")

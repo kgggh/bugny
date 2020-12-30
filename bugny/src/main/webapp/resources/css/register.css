@@ -11,6 +11,9 @@
 	text-align: center;
 }
 
+.form1 span.error { 
+	color:tomato; 
+	 }
 .form span.error { 
 	color:tomato; 
 	 }

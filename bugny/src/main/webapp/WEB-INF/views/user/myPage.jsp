@@ -13,11 +13,21 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/login.css">
 	<script type="text/javascript">
+	$(document).ready(function(){
+	  	  $("#userUpdatePage").on("click", function(){
+	  	    location.href = 'userUpdatePage';
+	  	  });  
+	  	
+	  	});
 	</script>
-	
+	<style type="text/css">
+		body{
+			padding-top: 150px;
+		}
+	</style>
 </head>
-<%@include file="../common/header.jsp" %>
 <body>
+<%@include file="../common/header.jsp" %>
 <div class="container">
 <div class="container-fluid">
 	<div class="row">
@@ -27,12 +37,13 @@
 			</h3>
 			<p>${user.id }님 환영합니다.</p>
 			<p>최근 접속일 : <fmt:formatDate value="${user.logTime }" type="Date" pattern="yyyy-MM dd:hh:mm"/> </p>
+			<button type="button" class="btn btn-secondary "  id="userUpdatePage">
+				정보수정
+			</button>
 			<p>내가 쓴글</p>
 			<p>추천 누른 글</p>
 			<p>추천 누른 음악</p>
-			<button value="회원정보수정">
-				
-			</button>
+			
 			
 		</div>
 	</div>
@@ -41,7 +52,6 @@
 
 </body>
 </html>
-
 
 
 

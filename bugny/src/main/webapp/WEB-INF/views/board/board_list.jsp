@@ -14,13 +14,22 @@
 	<script src="<c:url value="/resources/js/board.js" />"></script>
     <script type="text/javascript">
     </script>
+    <style type="text/css">
+		body{
+			padding-top: 150px;
+		}
+		#subTitle{
+			padding-bottom: 50px;
+		}
+	</style>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
-<div class="container-fluid" style="margin-top: 50px;">
+
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="text-center text-muted ">
+			<h3 class="text-center text-muted " id="subTitle">
 				자유게시판
 			</h3>
 			<div class="form-group row justify-content-end" id="search">
@@ -68,9 +77,11 @@
 				</tbody>
 			</table>
 			<div class="justify-content-end" align="right" id="btn">
+				<c:if test="${not empty user }">
 				<button type="button" class="btn btn-md btn-secondary pull-right" id="boardWriteP">
 					글작성
 				</button>
+				</c:if>
 			</div>
 			<div>
 			  <ul class="pagination">

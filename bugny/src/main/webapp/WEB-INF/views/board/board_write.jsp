@@ -10,12 +10,21 @@
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="<c:url value="/resources/js/board.js" />"></script>
 	<script type="text/javascript" src="resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
-	
+	<style type="text/css">
+		body{
+			padding-top: 150px;	
+		}
+		#subTitle{
+			padding-bottom: 50px;
+		}
+	</style>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
 <div class="container" role="main">
-	<h3 class="text-center ">게시글 쓰기</h3>
+	<h3 class="text-center text-muted " id="subTitle">
+		게시글 쓰기
+	</h3>
 	<form name="form" id="form" role="form" method="post">
 		<div  style="padding-right:10px">
 			<select class="form-control form-control-sm" name="category" id="category">
@@ -71,7 +80,7 @@ form.submit();
 
 
 var pasteHTML = function(filename){
-var sHTML = '<img src="${pageContext.request.contextPath}/resources/upload/'+filename+'">';
+var sHTML = '<img width="800px" height="700px" src="${pageContext.request.contextPath}/resources/upload/'+filename+'">';
 oEditors.getById["txtContent"].exec("PASTE_HTML", [sHTML]);
 };
 

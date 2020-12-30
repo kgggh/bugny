@@ -14,17 +14,20 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/jquery.validate.min.js" />"></script>
 	<script src="<c:url value="/resources/js/validate.js" />"></script>
-	
+	<style type="text/css">
+		body{
+			padding-top: 150px;	
+		}
+	</style>
 </head>
 <body>
-<%@include file="../common/header.jsp" %>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center text-muted">
 				회원정보수정
 			</h3>
-			<form role="form" action="userUpdate" class="form">
+			<form role="form1" action="userUpdate" class="form1" method="post">
 				<div class="form-group">
 					<label for="id">아이디</label>
 					<input type="text" name="id" id="id" value="${user.id }" class="form-control" readonly="readonly"/>

@@ -13,7 +13,7 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="<c:url value="/resources/js/music.js" />"></script>
-    <style type="text/css">
+     <style type="text/css">
 		body{
 			padding-top: 150px;	
 		}

@@ -19,15 +19,16 @@
 	  	  });  
 	  	
 	  	});
-		
-
 	</script>
-	
+	<style type="text/css">
+		body{
+			padding-top: 150px;	
+		}
+	</style>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
-
-<div class="container" style="width:500px; margin-top: 100px;">
+<div class="container" style="width:500px;">
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center text-muted">

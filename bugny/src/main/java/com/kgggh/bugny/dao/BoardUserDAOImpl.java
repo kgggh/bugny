@@ -42,6 +42,12 @@ public class BoardUserDAOImpl implements BoardDAO {
 	public void boardUpdate(BoardDTO board) throws Exception {
 		sql.update("board.boardUpdate",board);
 	}
+
+	@Override
+	public void boardDelete(int board_idx) {
+		sql.delete("board.boardDelete",board_idx);
+		
+	}
 	
 	
 

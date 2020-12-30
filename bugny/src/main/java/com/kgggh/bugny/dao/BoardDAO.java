@@ -11,6 +11,7 @@ public interface BoardDAO  {
 	public int boardCreate(BoardDTO board)throws Exception;
 	public BoardDTO boardDetail(BoardDTO board)throws Exception;
 	public void boardUpdate(BoardDTO board)throws Exception;
+	public void boardDelete(int board_idx);
 	
 
 	

@@ -1,9 +1,6 @@
 package com.kgggh.bugny.controller.user;
 
 
-
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -101,12 +98,14 @@ public class UserController {
 	@RequestMapping("/userUpdatePage")
 	public String userUpdatePage()throws Exception {
 		logger.info("회원정보수정페이지 진입");
-		return "user/user_update";
+		return "user/userUpdate";
 	}
 	
 	@RequestMapping("/userUpdate")
 	public String userUpdate(UserDTO user, Model model) throws Exception {
 		logger.info("회원정보수정");
+		String encryptPw = AES256Util.encrypt(user.getPassword()); //aes256 암호화
+		user.setPassword(encryptPw);
 		userService.userUpdate(user);
 		model.addAttribute("msg","수정 완료");
 		model.addAttribute("url","/home");
