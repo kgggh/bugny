@@ -1,4 +1,4 @@
-package com.kgggh.bugny.service;
+package com.kgggh.bugny.service.user;
 
 
 

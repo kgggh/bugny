@@ -4,6 +4,7 @@ package com.kgggh.bugny.controller.board;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,8 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.kgggh.bugny.dto.BoardDTO;
-import com.kgggh.bugny.service.BoardService;
+import com.kgggh.bugny.dto.Criteria;
+import com.kgggh.bugny.dto.SearchCriteria;
+import com.kgggh.bugny.service.board.BoardService;
 import com.kgggh.bugny.util.FileUpload;
+import com.kgggh.bugny.util.Pagination;
 
 @Controller
 public class BoardController {
@@ -30,12 +34,18 @@ public class BoardController {
 	BoardService boardService;
 	
 	
-	@RequestMapping(value = "/boardPage", method = RequestMethod.GET)
-	public String boardList(Model model,BoardDTO board) throws Exception {
-		log.info("게시판 페이지");
-		model.addAttribute("boardList",boardService.boardList(board));
+	@RequestMapping(value = "/boardList",method = RequestMethod.GET)
+	public String boardList(Model model,SearchCriteria cri) throws Exception{
+		Pagination pagination = new Pagination();
+		pagination.setCri(cri);
+		pagination.setTotalCount(boardService.countBoard(cri));
+	    List<BoardDTO> list = boardService.boardList(cri);
+	    model.addAttribute("boardList", list);
+	    model.addAttribute("pagination", pagination);
+
 		return "board/board_list";
 	}
+	
 	
 	//글쓰기페이지
 	@RequestMapping("/boardWriteP")
@@ -51,7 +61,7 @@ public class BoardController {
 		model.addAttribute("msg","작성완료");
 		model.addAttribute("url","/boardPage");
 		
-        return "redirect";
+        return "redirect:/boardList";
 	}
 	
 	//글수정페이지
@@ -82,10 +92,15 @@ public class BoardController {
 	@RequestMapping("/boardDetail")
 	public String boardDetail(BoardDTO board,@RequestParam("board_idx")int board_idx,Model model) throws Exception {
 		log.info("게시글상세 페이지");
+		boardService.boardHit(board_idx);
 		board = boardService.boardDetail(board);
 		model.addAttribute("boardDetail",board);
 		return "board/board_detail";
 	}
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	public String fileUpload(Model model, MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
@@ -94,7 +109,6 @@ public class BoardController {
 		String fileName = imgfile.getOriginalFilename();
 		String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 		String replaceName = cal.getTimeInMillis() + fileType;  
-		
 		String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/upload";
 		FileUpload.fileUpload(imgfile, path, replaceName);
 		model.addAttribute("path", path);

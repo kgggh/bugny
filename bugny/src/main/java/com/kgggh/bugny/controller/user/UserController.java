@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgggh.bugny.dto.UserDTO;
-import com.kgggh.bugny.service.UserService;
+import com.kgggh.bugny.service.user.UserService;
 import com.kgggh.bugny.util.AES256Util;
 
 
@@ -91,7 +91,7 @@ public class UserController {
 	
 	@RequestMapping("/myPage")
 	public String myPage(UserDTO user)throws Exception {
-		return "user/myPage";
+		return "user/user_myPage";
 	}
 	
 	

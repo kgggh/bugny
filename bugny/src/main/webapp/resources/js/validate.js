@@ -92,3 +92,5 @@ $(function(){
 				return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
 			}); 
 		});
+		
+				

@@ -4,22 +4,50 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 
-	<select id="countBoard" resultType="int">
-		SELECT 
-			COUNT(*)
-		FROM
-			board
-	</select>
-	
+	<update id="boardHit">
+		UPDATE
+			BOARD
+		SET
+			HIT = HIT + 1
+		WHERE BOARD_IDX = #{board_idx} 
+	</update>
  	<!-- 페이징 처리 후 게시글 조회 -->
- 	
+	
 	<select id="boardList" resultType="board">
 		SELECT
-			BOARD_IDX, ID, CATEGORY, TITLE, CONTENTS, HIT, LIKED, REGDATE
+			BOARD_IDX, ID, CATEGORY, TITLE, CONTENTS, HIT, REGDATE
 		FROM 
 			BOARD
+		WHERE board_idx > 0 <include refid="search"></include>
+			LIMIT #{pageStart}, #{perPageNum}
 	</select> 
+	
+	<select id="countBoard" resultType="int">
+		SELECT 
+			COUNT(board_idx)AS LISTCNT
+		FROM
+			BOARD
+		WHERE 
+			board_idx > 0<include refid="search"></include>
+			
+	</select>
+	
 
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and contents like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and id like CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	
+ 
 	
 	<!-- 게시글쓰기 -->
 	<insert id="boardCreate" parameterType="board" useGeneratedKeys="true" keyProperty="board_idx" >
@@ -55,4 +83,5 @@
 		WHERE 
 			BOARD_IDX = #{board_idx}
 	</select>
+	
 </mapper>

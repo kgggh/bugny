@@ -23,7 +23,7 @@
 		 <div class="collapse navbar-collapse" id="navDiv">
 			<ul class="navbar-nav  mr-auto">
 				<li class="nav-item">
-				  <a class="nav-link" href="musicTop100">음악 Top100</a>
+				  <a class="nav-link" href="musicTop">인기음악</a>
 				</li>
 				<li class="nav-item">
 				  <a class="nav-link" href="musicNewest">최신음악</a>
@@ -35,10 +35,10 @@
 				  <a class="nav-link" href="recomCafe">추천카페(업뎃중)</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="boardPage">자유게시판(구현)</a>
+				  <a class="nav-link" href="boardList">자유게시판(구현)</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="liveChat">라이브채팅</a>
+				  <a class="nav-link" href="liveChat" >라이브채팅</a>
 				</li>
 		    </ul>
 		    <ul class="nav navbar-nav ml-auto navbar-right">

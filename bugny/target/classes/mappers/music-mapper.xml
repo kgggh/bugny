@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="music">
+
+	<select id="countNewMusic" resultType="int">
+		SELECT 
+			COUNT(MUSIC_IDX)AS MUSICNEWEST
+		FROM MUSIC
+		WHERE music_idx > 0 <include refid="search"></include>
+	</select>
+ 	
+	<select id="countTopMusic" resultType="int">
+		    SELECT 
+				COUNT(*) AS MUSICTOP
+			FROM MUSIC
+			
+	</select>
+	
+ 	<!-- 페이징(검색) 처리 후 음악 조회(최신곡) -->
+ 	
+	<select id="musicNewest" resultType="music">
+		SELECT
+			M.*,IFNULL(SUM(LIKED.LIKECHECK), 0 ) AS LIKECHECK
+		FROM 
+			MUSIC M
+		LEFT JOIN LIKE_MUSIC LIKED
+        	ON M.MUSIC_IDX = LIKED.MUSIC_IDX
+		WHERE 
+			M.MUSIC_IDX  > 0 <include refid="search"></include>
+		GROUP BY MUSIC_IDX
+        ORDER BY RELEASEDATE DESC
+		LIMIT #{pageStart}, #{perPageNum}
+        
+	</select> 
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and singer like CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	
+	
+ 	<!-- 페이징 처리 후 음악 조회(top100) -->
+ 	
+	<select id="musicTop" resultType="music">
+		SELECT
+			M.*,IFNULL(SUM(LIKED.LIKECHECK), 0 ) AS LIKECHECK
+		FROM 
+			MUSIC M
+		LEFT JOIN LIKE_MUSIC LIKED
+       		ON M.MUSIC_IDX = LIKED.MUSIC_IDX
+		WHERE 
+			M.MUSIC_IDX > 0
+		GROUP BY MUSIC_IDX
+		ORDER BY LIKECHECK DESC 
+		LIMIT #{pageStart}, #{perPageNum}
+	</select> 
+	
+	
+	<!-- 게시글쓰기 -->
+	<insert id="musicCreate" parameterType="music" useGeneratedKeys="true" keyProperty="music_idx" >
+		INSERT INTO MUSIC
+			(TITLE,SINGER,PLAYURL,RELEASEDATE,ALBUM)
+   		VALUES 
+   			(#{title}, #{singer}, #{playURL},#{releaseDate}, #{album})
+	</insert>
+	
+	
+	<delete id="musicDelete">
+		DELETE 
+			FROM MUSIC
+		WHERE 
+			MUSIC_IDX = #{music_idx}
+	</delete>
+</mapper>

@@ -1,4 +1,4 @@
-package com.kgggh.bugny.dao;
+package com.kgggh.bugny.dao.board;
 
 import java.util.List;
 
@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgggh.bugny.dto.BoardDTO;
-import com.kgggh.bugny.util.Pagination;
+import com.kgggh.bugny.dto.Criteria;
+import com.kgggh.bugny.dto.SearchCriteria;
 
 
 @Repository("boardDAO")
@@ -17,8 +18,8 @@ public class BoardUserDAOImpl implements BoardDAO {
 	SqlSession sql;
 
 	@Override
-	public int countBoard() throws Exception {
-		return sql.selectOne("board.countBoard");
+	public int countBoard(SearchCriteria cri) throws Exception {
+		return sql.selectOne("board.countBoard",cri);
 	}
 
 	@Override
@@ -31,11 +32,9 @@ public class BoardUserDAOImpl implements BoardDAO {
 		return sql.selectOne("board.boardDetail",board);
 	}
 
-
-
 	@Override
-	public List<BoardDTO> boardList(BoardDTO board) {
-		return sql.selectList("board.boardList");
+	public List<BoardDTO> boardList(SearchCriteria cri) {
+		return sql.selectList("board.boardList",cri);
 	}
 
 	@Override
@@ -48,8 +47,14 @@ public class BoardUserDAOImpl implements BoardDAO {
 		sql.delete("board.boardDelete",board_idx);
 		
 	}
-	
-	
+
+	@Override
+	public void boardHit(int board_idx) {
+		sql.update("board.boardHit",board_idx);
+		
+	}
+
+
 
 	
 

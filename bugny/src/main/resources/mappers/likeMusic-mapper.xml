@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="likeMusic">
+
+	<insert id="likeMusic" parameterType="LikeMusic" useGeneratedKeys="true" keyProperty="like_idx">
+		INSERT INTO 
+			LIKE_MUSIC(MUSIC_IDX,ID)
+		VALUES(#{music_idx},#{id})
+	</insert>
+
+	<select id="read" resultType="likeMusic">
+		SELECT IFNULL(SUM(LM.LIKECHECK),0 ) AS 'likedCnt'
+		FROM
+			LIKE_MUSIC AS LM
+		WHERE
+			LM.music_idx = #{music_idx}
+			AND LM.id= #{id}
+	</select>
+	
+	<delete id="like">
+		DELETE FROM TBL_LIKE
+		WHERE BNO = #{BNO} AND UID = #{UID}
+	</delete>
+
+	
+</mapper>

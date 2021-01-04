@@ -1,7 +1,7 @@
 
  $(document).on('click', '#btnList', function(e){
 		e.preventDefault();
-		location.href="boardPage";
+		location.href="boardList";
 	});
 
 	
@@ -15,13 +15,10 @@
 		form.submit();
 	};
 	
-	var onList = function(){
-		location.href='boardPage';
-	};
-	
+
 
 	$(document).on('click', '#btnList', function(e){
-		location.href = "boardPage";
+		location.href = "boardList";
 	});
 
 

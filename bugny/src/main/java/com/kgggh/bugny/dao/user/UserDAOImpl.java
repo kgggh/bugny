@@ -1,4 +1,4 @@
-package com.kgggh.bugny.dao;
+package com.kgggh.bugny.dao.user;
 
 
 import org.apache.ibatis.session.SqlSession;

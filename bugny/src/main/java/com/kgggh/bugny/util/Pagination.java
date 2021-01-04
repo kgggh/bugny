@@ -1,100 +1,120 @@
 package com.kgggh.bugny.util;
 
+
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.kgggh.bugny.dto.Criteria;
+import com.kgggh.bugny.dto.SearchCriteria;
+
+
 public class Pagination {
-	
-	// 현재페이지, 시작페이지, 끝페이지, 게시글 총 갯수, 페이지당 글 갯수, 마지막페이지, SQL쿼리에 쓸 start, end
-	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
-	private int cntPage = 5;
-	
-	public Pagination() {
-	}
-	public Pagination(int total, int nowPage, int cntPerPage) {
-		setNowPage(nowPage);
-		setCntPerPage(cntPerPage);
-		setTotal(total);
-		calcLastPage(getTotal(), getCntPerPage());
-		calcStartEndPage(getNowPage(), cntPage);
-		calcStartEnd(getNowPage(), getCntPerPage());
-	}
-	// 제일 마지막 페이지 계산
-	public void calcLastPage(int total, int cntPerPage) {
-		setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
-	}
-	// 시작, 끝 페이지 계산
-	public void calcStartEndPage(int nowPage, int cntPage) {
-		setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
-		if (getLastPage() < getEndPage()) {
-			setEndPage(getLastPage());
+		private Criteria cri;
+	    private int totalCount;
+	    private int startPage;
+	    private int endPage;
+	    private boolean prev;
+	    private boolean next;
+	    private int displayPageNum = 5;
+	    
+	    
+	    public Criteria getCri() {
+	        return cri;
+	    }
+	    public void setCri(Criteria cri) {
+	        this.cri = cri;
+	    }
+	    public int getTotalCount() {
+	        return totalCount;
+	    }
+	    public void setTotalCount(int totalCount) {
+	        this.totalCount = totalCount;
+	        calcData();
+	    }
+	    
+	    private void calcData() {
+	        
+	        endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+	        
+	        startPage = (endPage - displayPageNum) + 1;
+	        if(startPage <= 0) startPage = 1;
+	        
+	        int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
+	        if (endPage > tempEndPage) {
+	            endPage = tempEndPage;
+	        }
+	 
+	        prev = startPage == 1 ? false : true;
+	        next = endPage * cri.getPerPageNum() < totalCount ? true : false;
+	        
+	    }
+	    
+	    
+	    public int getStartPage() {
+	        return startPage;
+	    }
+	    public void setStartPage(int startPage) {
+	        this.startPage = startPage;
+	    }
+	    public int getEndPage() {
+	        return endPage;
+	    }
+	    public void setEndPage(int endPage) {
+	        this.endPage = endPage;
+	    }
+	    public boolean isPrev() {
+	        return prev;
+	    }
+	    public void setPrev(boolean prev) {
+	        this.prev = prev;
+	    }
+	    public boolean isNext() {
+	        return next;
+	    }
+	    public void setNext(boolean next) {
+	        this.next = next;
+	    }
+	    public int getDisplayPageNum() {
+	        return displayPageNum;
+	    }
+	    public void setDisplayPageNum(int displayPageNum) {
+	        this.displayPageNum = displayPageNum;
+	    }
+	    
+	    public String makeQuery(int page) {
+			UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+					.queryParam("perPageNum", cri.getPerPageNum()).build();
+			return uriComponents.toUriString();
 		}
-		setStartPage(getEndPage() - cntPage + 1);
-		if (getStartPage() < 1) {
-			setStartPage(1);
+		public String makeSearch(int page) {
+			UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+					.queryParam("perPageNum", cri.getPerPageNum())
+					.queryParam("searchType", ((SearchCriteria) cri).getSearchType())
+					.queryParam("keyword", encoding(((SearchCriteria) cri).getKeyword())).build();
+			return uriComponents.toUriString();
 		}
+		
+		private String encoding(String keyword) {
+			if (keyword == null || keyword.trim().length() == 0) {
+				return "";
+			}
+			
+			try {
+				return URLEncoder.encode(keyword, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return "";
+			}
+		}
+		@Override
+		public String toString() {
+			return "Pagination [cri=" + cri + ", totalCount=" + totalCount + ", startPage=" + startPage + ", endPage="
+					+ endPage + ", prev=" + prev + ", next=" + next + ", displayPageNum=" + displayPageNum + "]";
+		}
+	    
+		
+	    
 	}
-	// DB 쿼리에서 사용할 start, end값 계산
-	public void calcStartEnd(int nowPage, int cntPerPage) {
-		setEnd(nowPage * cntPerPage);
-		setStart(getEnd() - cntPerPage + 1);
-	}
-	
-	public int getNowPage() {
-		return nowPage;
-	}
-	public void setNowPage(int nowPage) {
-		this.nowPage = nowPage;
-	}
-	public int getStartPage() {
-		return startPage;
-	}
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
-	}
-	public int getEndPage() {
-		return endPage;
-	}
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
-	}
-	public int getTotal() {
-		return total;
-	}
-	public void setTotal(int total) {
-		this.total = total;
-	}
-	public int getCntPerPage() {
-		return cntPerPage;
-	}
-	public void setCntPerPage(int cntPerPage) {
-		this.cntPerPage = cntPerPage;
-	}
-	public int getLastPage() {
-		return lastPage;
-	}
-	public void setLastPage(int lastPage) {
-		this.lastPage = lastPage;
-	}
-	public int getStart() {
-		return start;
-	}
-	public void setStart(int start) {
-		this.start = start;
-	}
-	public int getEnd() {
-		return end;
-	}
-	public void setEnd(int end) {
-		this.end = end;
-	}	
-	public int setCntPage() {
-		return cntPage;
-	}
-	public void getCntPage(int cntPage) {
-		this.cntPage = cntPage;
-	}
-	@Override
-	public String toString() {
-		return "PagingVO [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
-				+ ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
-				+ ", cntPage=" + cntPage + "]";
-	}
-}

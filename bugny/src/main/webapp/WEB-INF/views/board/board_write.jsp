@@ -10,6 +10,9 @@
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="<c:url value="/resources/js/board.js" />"></script>
 	<script type="text/javascript" src="resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
+	<script type="text/javascript">
+	
+	</script>
 	<style type="text/css">
 		body{
 			padding-top: 150px;	
@@ -73,7 +76,12 @@ fOnAppLoad: function () {
 
 var onWrite = function(){
 oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
-var form = document.getElementById("form");  
+var form = document.getElementById("form"); 
+if($("#title").val() == '') {
+	alert("제목을 작성해주세요."); 
+	$('#title2').focus();
+	return;
+}
 form.action ="boardWrite";              
 form.submit();  
 };

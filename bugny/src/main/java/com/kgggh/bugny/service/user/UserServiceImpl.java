@@ -1,4 +1,4 @@
-package com.kgggh.bugny.service;
+package com.kgggh.bugny.service.user;
 
 
 
@@ -7,7 +7,7 @@ package com.kgggh.bugny.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kgggh.bugny.dao.UserDAO;
+import com.kgggh.bugny.dao.user.UserDAO;
 import com.kgggh.bugny.dto.UserDTO;
 
 @Service("userService")

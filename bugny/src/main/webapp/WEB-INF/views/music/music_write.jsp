@@ -1,85 +1,135 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<title>음악등록</title>
+	<link rel="stylesheet" type="text/css"href="resources/css/reset.css">
+	<link rel="stylesheet" type="text/css"href="resources/css/music.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
+	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="<c:url value="/resources/js/music.js" />"></script>
-    <style type="text/css">
+	<script type="text/javascript" src="resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
+	
+	<script type="text/javascript" src="resources/js/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+	
+	</script>
+	<style type="text/css">
 		body{
 			padding-top: 150px;	
 		}
+		#subTitle{
+			padding-bottom: 50px;
+		}
+		
 	</style>
 </head>
 <body>
-<%@include file="../common/header.jsp" %>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h3 class="text-center text-muted">
-				음악등록
-			</h3>
-			<div class="form-group row justify-content-end" id="search">
-				<div class="w100" style="padding-right:10px">
-					<select class="form-control form-control-sm" name="searchType" id="searchType">
-						<option value="album">앨범</option>
-						<option value="title">제목</option>
-						<option value="singer">가수</option>
-					</select>
-				</div>
-				<div class="w300" style="padding-right:10px">
-					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
-				</div>
-				<div>
-					<button class="btn btn-sm btn-secondary" name="btnSearch" id="btnSearch">검색</button>
-				</div>
-			</div>
-			
-			<table class="table table-hover text-center">
-				<thead>
-						<tr> 
-							<th style="width: 10%">순위</th>
-							<th style="width: 10%">앨범</th>
-							<th style="width: 5%">제목</th>
-							<th style="width: 50%">가수</th>
-							<th style="width: 5%">좋아요</th>
-							<th style="width: 10%">재생수</th>
-						</tr>
-				</thead>
-				<tbody>
-					<tr>
-					<c:if test="${not empty boardList }">
-						<c:forEach var="board" items="${boardList }">
-							<tr>
-								<td>1</td>
-								<td>앨범커버</td>	
-								<td>거짓말</td>
-								<td>빅뱅</td>
-								<td>0</td>
-								<td>154</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-					</tr>
-				</tbody>
-			</table>
-			<div class="justify-content-end" align="right" id="btn">
-				<button type="button" class="btn btn-md btn-secondary pull-right" id="musicWriteP">
-					노래등록
-				</button>
-			</div>
+<div class="container" role="main">
+	<h3 class="text-center text-muted " id="subTitle">
+		음악등록
+	</h3>
+	<form name="form2" id="form2" role="form2" >
+		<div class="mb-3">
+			<label for="title">제목</label>
+			<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
 		</div>
-	</div>
+		<div class="mb-3">
+			<label for="singer">가수</label>
+			<input type="text" class="form-control" name="singer" id="singer" placeholder="가수를 입력해 주세요">
+		</div>
+		<div class="mb-3">
+			<label for="playURL">URL</label>
+			<input type="text" class="form-control" name="playURL" id="playURL" placeholder="재생 url주소를 입력해 주세요.">
+		</div>
+		<div class="mb-3">
+			<label for="releaseDate">발매일</label>
+			<input type="date" class="form-control" name="releaseDate" id="releaseDate" placeholder="발매일을 작성해주세요. Ex)yyyy-mm-dd">
+		</div>
+		<div class="contentDiv">
+			<label for="album">앨범커버</label>
+		 	<textarea id="txtContent" name="album" rows="30" style="width:100%;"></textarea>
+		</div>
+		<div class="selectBtn">
+			<button type="button"  class="btn btn-sm btn-secondary" id="btnWrite" onclick="onWrite()">작성완료</button>
+			<button type="button" class="btn btn-sm btn-secondary" id="btnList">목록</button>
+		</div>
+	</form>
 </div>
+</body>
+
+<script type="text/javascript"  charset="utf-8" >
+	$(function(){
+		$("#form2").validate({
+			//규칙
+			rules:{
+				releaseDate:{
+					required : true, //필수입력여부
+					date : true 	//date
+				}
+			},
+			//메시지
+			messages:{
+				releaseDate:{
+					required :"생년월일을 입력해 주세요",
+					date : " Ex) YYYY-MM-DD" 
+				}
+			},
+			//메시지 태그
+			errorElement : 'span', 	//태그
+			errorClass: 'error',	//클레스 이름
+			validClass:'vaild' 
+		});
+});
 	
 
-</body>
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+oAppRef: oEditors,
+elPlaceHolder: document.getElementById('txtContent'), // html editor가 들어갈 textarea id
+sSkinURI: "resources/se/SmartEditor2Skin.html",  // html editor가 skin url
+fOnAppLoad: function () { 
+    //수정모드를 구현할 때 사용할 부분. 로딩이 끝난 후 값이 체워지게 하는 구현을 하면 된다.
+     var album = '${music.album}';         //db에서 불러온 값을 여기에서 체워넣으면 됨.
+     oEditors.getById["txtContent"].exec("PASTE_HTML", [album]); //로딩이 끝나면 contents를 txtContent에 넣음
+ },
+ fCreator: "createSEditor2"
+});	
+
+var onWrite = function(){
+oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
+var form2 = document.getElementById("form2"); 
+if($("#title").val() == '') {
+	alert("제목을 작성해주세요."); 
+	$('#title').focus();
+	return;
+}
+if($("#singer").val() == '') {
+	alert("가수를 작성해주세요."); 
+	$('#singer').focus();
+	return;
+}
+if($("#playURL").val() == '') {
+	alert("URL을 작성해주세요."); 
+	$('#playURL').focus();
+	return;
+}
+
+form2.action ="musicWrite";              
+form2.submit();  
+};
+
+
+var pasteHTML = function(filename){
+var sHTML = '<img width="60px" height="60px" src="${pageContext.request.contextPath}/resources/upload/'+filename+'">';
+oEditors.getById["txtContent"].exec("PASTE_HTML", [sHTML]);
+};
+
+</script>
+
 </html>
+
+

@@ -12,6 +12,7 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/board.js" />"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<script type="text/javascript">
 		$(document).on('click', '#btnUpdate', function(e){
 			location.href="boardUpdateP?board_idx=${boardDetail.board_idx}";
@@ -19,6 +20,41 @@
 		$(document).on('click', '#btnDelete', function(e){
 			location.href="boardDelete?board_idx=${boardDetail.board_idx}";
 		});
+
+		$(function(){
+			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+			$("#rec_update").click(function(){
+				$.ajax({
+					url: "/board/likeUpdate",
+	                type: "POST",
+	                data: {
+	                    idx: ${board.board_idx},
+	                    id: '${id}'
+	                },
+	                success: function () {
+				        recCount();
+	                },
+				})
+			})
+			
+			// 게시글 추천수
+		    function recCount() {
+				$.ajax({
+					url: "/board/likeCount",
+	                type: "POST",
+	                data: {
+	                    idx: ${board.board_idx}
+	                },
+	                success: function (count) {
+	                	$("#heart").html(count);
+	                },
+	                error:
+	                	function (request, status, error){
+	                	alert("ajax실패")
+	                	}
+				})
+		    };
+		    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
 	</script>
 	<style type="text/css">
 		body{
@@ -26,6 +62,9 @@
 		}
 		#subTitle{
 			padding-bottom: 50px;
+		}
+		#heart{
+			cursor:pointer;
 		}
 	</style>
 </head>
@@ -37,33 +76,33 @@
 			게시글 상세
 			</h3>
  			<div class="row">
-				    <div class="table table-responsive">
-				        <table class="table" >
-				         <colgroup>
-						    <col class="col-xs-1">
-						 	<col class="col-xs-7">
-						 </colgroup>
-					        <tr>
-					            <th class="active" colspan="2">카테고리</th>
-					            <td colspan="3"><c:out value="${boardDetail.category }"/></td>
-				               	<th class="active" colspan="2">작성자</th>
-					            <td colspan="3"><c:out value="${boardDetail.id }"/></td>
-					            <th class="active" colspan="3" >작성일</th>
-					            <td colspan="4"><c:out value="${boardDetail.regdate}"/></td>
-					        </tr>
-					        <tr>
-					        	<th class="active" >제목</th>
-					            <td colspan="9" style=""><c:out value="${boardDetail.title }"/></td>
-					          	<th class="active" colspan="2" >조회수</th>
-					            <td ><c:out value="${boardDetail.hit }"/></td>
-					            <th class="active" colspan="2">추천</th>
-					            <td colspan="2"><c:out value="${boardDetail.liked }"/></td>
-					        </tr>
-					       	<tr>
-					            <th colspan="16">${boardDetail.contents}</th>
-					        </tr>
-		         		</table>
-         			</div>
+			    <div class="table table-responsive">
+			        <table class="table" >
+			        <colgroup>
+					    <col class="col-xs-1">
+					 	<col class="col-xs-7">
+					</colgroup>
+				        <tr>
+				            <th class="active" colspan="2">카테고리</th>
+				            <td colspan="3"><c:out value="${boardDetail.category }"/></td>
+			               	<th class="active" colspan="2">작성자</th>
+				            <td colspan="3"><c:out value="${boardDetail.id }"/></td>
+				            <th class="active" colspan="3" >작성일</th>
+				            <td colspan="4"><c:out value="${boardDetail.regdate}"/></td>
+				        </tr>
+				        <tr>
+				        	<th class="active" >제목</th>
+				            <td colspan="9" style=""><c:out value="${boardDetail.title }"/></td>
+				          	<th class="active" colspan="2" >조회수</th>
+				            <td ><c:out value="${boardDetail.hit }"/></td>
+				            <th class="active" colspan="2">추천</th>
+				            <td colspan="2"><i class="far fa-heart " id="heart">${boardDetail.liked }</i></td>
+				        </tr>
+				       	<tr>
+				            <th colspan="16">${boardDetail.contents}</th>
+				        </tr>
+	         		</table>
+  				</div>
 			</div>
 			<div class="text-center">
 				<c:if test="${boardDetail.id == user.id }">

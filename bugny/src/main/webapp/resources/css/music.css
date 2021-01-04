@@ -6,9 +6,6 @@
 	color: black;
 	list-style: none;
 }
-body{
-	padding-top: 70px;	
-}
 
 .col-md-12{
 	margin: 0px;
@@ -25,11 +22,10 @@ body{
 	text-align: center;
 	
 }
-
+.form2 span.error { 
+	color:tomato; 
+	}
 
 .container{
 	width: 100%;
-}
-.text-center{
-	margin-top: 30px;
 }

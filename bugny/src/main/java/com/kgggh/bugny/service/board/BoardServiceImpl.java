@@ -1,4 +1,4 @@
-package com.kgggh.bugny.service;
+package com.kgggh.bugny.service.board;
 
 
 
@@ -6,9 +6,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.kgggh.bugny.dao.BoardDAO;
+
+import com.kgggh.bugny.dao.board.BoardDAO;
 import com.kgggh.bugny.dto.BoardDTO;
-import com.kgggh.bugny.util.Pagination;
+import com.kgggh.bugny.dto.Criteria;
+import com.kgggh.bugny.dto.SearchCriteria;
 
 
 
@@ -19,8 +21,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO ;
 	
 	@Override
-	public int countBoard() throws Exception {
-		return boardDAO.countBoard();
+	public int countBoard(SearchCriteria cri) throws Exception {
+		return boardDAO.countBoard(cri);
 				
 	}
 	
@@ -35,8 +37,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> boardList(BoardDTO board) throws Exception{
-		return	boardDAO.boardList(board);
+	public List<BoardDTO> boardList(SearchCriteria cri) throws Exception{
+		return	boardDAO.boardList(cri);
 	}
 
 	@Override
@@ -49,6 +51,16 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.boardDelete(board_idx);
 		
 	}
+
+	@Override
+	public void boardHit(int board_idx) throws Exception {
+		boardDAO.boardHit(board_idx);
+		
+	}
+
+	
+	
+
 
 
 	

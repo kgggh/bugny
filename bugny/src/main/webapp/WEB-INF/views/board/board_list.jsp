@@ -13,7 +13,9 @@
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="<c:url value="/resources/js/board.js" />"></script>
     <script type="text/javascript">
+    
     </script>
+    
     <style type="text/css">
 		body{
 			padding-top: 150px;
@@ -32,22 +34,26 @@
 			<h3 class="text-center text-muted " id="subTitle">
 				자유게시판
 			</h3>
-			<div class="form-group row justify-content-end" id="search">
-				<div class="w100" style="padding-right:10px">
-					<select class="form-control form-control-sm" name="searchType" id="searchType">
-						<option value="title">제목</option>
-						<option value="Content">내용</option>
-						<option value="reg_id">작성자</option>
-					</select>
+			<form method="get" role="form">
+				<div class="form-group row justify-content-end" id="search">
+						<div class="w100" style="padding-right:10px">
+							<select class="form-control form-control-sm" name="searchType" id="searchType">
+								<option value="t"
+									<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목</option>
+								<option value="c"
+									<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>내용</option>
+								<option value="w"
+								<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>작성자</option>
+							</select>
+						</div>
+						<div class="w300" style="padding-right:10px">
+							<input type="text" class="form-control form-control-sm" name="keyword" id="keywordInput" value="${cri.keyword }">
+						</div>
+						<div>
+							<button class="btn btn-sm btn-secondary " type="button" id="btnSearch">검색</button>
+						</div>
 				</div>
-				<div class="w300" style="padding-right:10px">
-					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
-				</div>
-				<div>
-					<button class="btn btn-sm btn-secondary " name="btnSearch" id="btnSearch">검색</button>
-				</div>
-			</div>
-			
+			</form>
 			<table class="table table-hover text-center">
 				<thead>
 						<tr> 
@@ -73,6 +79,11 @@
 							</tr>
 						</c:forEach>
 					</c:if>
+					<c:if test="${empty boardList }">
+							<tr>
+								<td colspan="6">등록된 게시글이 없습니다.</td>
+							</tr>
+					</c:if>
 					</tr>
 				</tbody>
 			</table>
@@ -84,37 +95,45 @@
 				</c:if>
 			</div>
 			<div>
-			  <ul class="pagination">
-			    <li class="page-item disabled">
-			      <a class="page-link" href="#">&laquo;</a>
-			    </li>
-			    <li class="page-item active">
-			      <a class="page-link" href="#">1</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">2</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">3</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">4</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">5</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">&raquo;</a>
-			    </li>
-			  </ul>
+			  	<ul class="pagination" style="justify-content: center;">
+					<c:if test="${pagination.prev }">
+						<li class="page-item">
+							<a class="page-link" href='<c:url value="/boardList${pagination.makeSearch(pagination.startPage - 1)}"/>'>Previous</a>
+						</li>
+					</c:if>
+				    <c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="pageNum">
+						<li class="page-item <c:out value="${pagination.cri.page == pageNum ? 'active' : ''}"/>">
+							<a class="page-link" href='<c:url value="/boardList${pagination.makeSearch(pageNum)}"/>'>${pageNum }</a>
+						</li>
+					</c:forEach>	
+					<c:if test="${pagination.next && pagination.endPage >0 }">
+						<li class="page-item">
+							<a class="page-link" href='<c:url value="/boardList${pagination.makeSearch(pagination.endPage + 1)}"/>'>Next</a>
+						</li>
+					</c:if>
+				</ul>
 			</div>
-			
-
 			
 		</div>
 	</div>
 </div>
-	
-
 </body>
+<script type="text/javascript">
+var formObj = $("form[role='form']")
+	$(document).ready(
+			function() {
+				$('#btnSearch').on(
+					"click",
+					function(event) {
+						var page = '${cri.page}';
+						var perPageNum = '${cri.perPageNum}';
+						var searchType = '${cri.searchType}}';
+						var keyword = '${cri.keyword}';
+	
+						formObj.attr("action","boardList");
+						formObj.submit();
+				
+					});
+			});
+	</script>
 </html>

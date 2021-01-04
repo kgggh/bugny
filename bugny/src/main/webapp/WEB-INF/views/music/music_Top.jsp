@@ -13,9 +13,49 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="<c:url value="/resources/js/music.js" />"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+	<script type="text/javascript">
+	$(function(){
+		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+		$("#heart").click(function(){
+			$.ajax({
+				url: "/musicLiked",
+                type: "POST",
+                data: {
+                    no: ${content.board_no},
+                    id: '${id}'
+                },
+                success: function () {
+			        recCount();
+                },
+			})
+		})
+		
+		// 게시글 추천수
+	    function recCount() {
+			$.ajax({
+				url: "/expro/RecCount.do",
+                type: "POST",
+                data: {
+                    no: ${content.board_no}
+                },
+                success: function (count) {
+                	$(".rec_count").html(count);
+                },
+			})
+	    };
+	    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+	</script>
     <style type="text/css">
 		body{
 			padding-top: 150px;		
+		}
+		#table td {
+			vertical-align: middle;
+			text-align: center;
+		}
+		#heart{
+			cursor:pointer;
 		}
 	</style>
 </head>
@@ -27,54 +67,69 @@
 			<h3 class="text-center text-muted">
 				이 노래 모르면 간첩!
 			</h3>
-			<div class="form-group row justify-content-end" id="search">
-				<div class="w100" style="padding-right:10px">
-					<select class="form-control form-control-sm" name="searchType" id="searchType">
-						<option value="album">앨범</option>
-						<option value="title">제목</option>
-						<option value="singer">가수</option>
-					</select>
-				</div>
-				<div class="w300" style="padding-right:10px">
-					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
-				</div>
-				<div>
-					<button class="btn btn-sm btn-secondary" name="btnSearch" id="btnSearch">검색</button>
-				</div>
-			</div>
-			
-			<table class="table table-hover text-center">
+			<table class="table table-hover text-center" id="table">
 				<thead>
 						<tr> 
 							<th style="width: 10%">순위</th>
 							<th style="width: 10%">앨범</th>
-							<th style="width: 5%">제목</th>
-							<th style="width: 50%">가수</th>
-							<th style="width: 5%">좋아요</th>
-							<th style="width: 10%">재생수</th>
+							<th style="width: 10%">발매일</th>
+							<th style="width: 30%">제목</th>
+							<th style="width: 20%">가수</th>
+							<th style="width: 10%">좋아요</th>
+							<th style="width: 10%"></th>
 						</tr>
 				</thead>
 				<tbody>
-					<tr>
-					<c:if test="${not empty boardList }">
-						<c:forEach var="board" items="${boardList }">
-							<tr>
-								<td>1</td>
-								<td>앨범커버</td>	
-								<td>거짓말</td>
-								<td>빅뱅</td>
-								<td>0</td>
-								<td>154</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-					</tr>
+				<c:if test="${not empty musicTop }">
+					<c:forEach var="music" items="${musicTop }">
+						<tr>
+							<td>${count }</td>
+							<td>${music.album }</td>	
+							<td>${music.releaseDate }</td>
+							<td>${music.title }</td>
+							<td>${music.singer }</td>
+							<c:if test="${not empty user}">
+							<td><i class="far fa-heart " id="heart"></i> ${music.likeCheck }</td>
+							</c:if>
+							<c:if test="${empty user}">
+							<td><i class="far fa-heart " id="heart"></i> ${music.likeCheck} </td>
+							</c:if>
+							<td><a href="${music.playURL }"onclick="window.open(this.href,'','width=500,height=500,scrollbars=no'); return false;"><i class="fab fa-youtube fa-3x"></i></a></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty musicTop }">
+						<tr>
+							<td colspan="6">등록된 노래가 없습니다.</td>
+						</tr>
+				</c:if>
 				</tbody>
 			</table>
 			<div class="justify-content-end" align="right" id="btn">
+				<c:if test="${user.id eq 'admin'}">
 				<button type="button" class="btn btn-md btn-secondary pull-right" id="musicWriteP">
-					노래등록
+					글작성
 				</button>
+				</c:if>
+			</div>
+			<div>
+			  	<ul class="pagination" style="justify-content: center;">
+					<c:if test="${pagination.prev }">
+						<li class="page-item">
+							<a class="page-link" href='<c:url value="/musicTop?page=${pagination.startPage-1 }"/>'>Previous</a>
+						</li>
+					</c:if>
+				    <c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="pageNum">
+						<li class="page-item <c:out value="${pagination.cri.page == pageNum ? 'active' : ''}"/>">
+							<a class="page-link" href='<c:url value="/musicTop?page=${pageNum }"/>'>${pageNum }</a>
+						</li>
+					</c:forEach>	
+					<c:if test="${pagination.next && pagination.endPage >0 }">
+						<li class="page-item">
+							<a class="page-link" href='<c:url value="/musicTop?page=${pagination.endPage+1 }"/>'>Next</a>
+						</li>
+					</c:if>
+				</ul>
 			</div>
 		</div>
 	</div>

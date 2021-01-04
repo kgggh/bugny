@@ -6,11 +6,15 @@
   <typeAliases>
   		<typeAlias alias="user" type="com.kgggh.bugny.dto.UserDTO"/>
   		<typeAlias alias="board" type="com.kgggh.bugny.dto.BoardDTO"/>
+  		<typeAlias alias="music" type="com.kgggh.bugny.dto.MusicDTO"/>
+  		<typeAlias alias="likeMusic" type="com.kgggh.bugny.dto.LikeMusicDTO"/>
   </typeAliases>
   
   <mappers>
   		<mapper resource="mappers/user-mapper.xml"/>
   		<mapper resource="mappers/board-mapper.xml"/>
+  		<mapper resource="mappers/music-mapper.xml"/>
+  		<mapper resource="mappers/likeMusic-mapper.xml"/>
   </mappers>
   
 </configuration>
