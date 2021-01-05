@@ -1,16 +1,15 @@
 package com.kgggh.bugny.dto;
 
 public class LikeMusicDTO {
-	private int like_music;
+	private int like_idx;
 	private int music_idx;
-	private int id;
+	private String id;
 	private int likeCheck;
-	
-	public int getLike_music() {
-		return like_music;
+	public int getLike_idx() {
+		return like_idx;
 	}
-	public void setLike_music(int like_music) {
-		this.like_music = like_music;
+	public void setLike_idx(int like_idx) {
+		this.like_idx = like_idx;
 	}
 	public int getMusic_idx() {
 		return music_idx;
@@ -18,10 +17,10 @@ public class LikeMusicDTO {
 	public void setMusic_idx(int music_idx) {
 		this.music_idx = music_idx;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public int getLikeCheck() {
@@ -32,9 +31,11 @@ public class LikeMusicDTO {
 	}
 	@Override
 	public String toString() {
-		return "LikeMusic [like_music=" + like_music + ", music_idx=" + music_idx + ", id=" + id + ", likeCheck="
+		return "LikeMusicDTO [like_idx=" + like_idx + ", music_idx=" + music_idx + ", id=" + id + ", likeCheck="
 				+ likeCheck + "]";
 	}
+	
+	
 
 	
 

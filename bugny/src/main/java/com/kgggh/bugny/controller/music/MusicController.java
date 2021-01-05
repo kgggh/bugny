@@ -2,17 +2,22 @@ package com.kgggh.bugny.controller.music;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.LikeMusicDTO;
 import com.kgggh.bugny.dto.MusicDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
+import com.kgggh.bugny.dto.UserDTO;
 import com.kgggh.bugny.service.music.MusicService;
 import com.kgggh.bugny.util.Pagination;
 
@@ -26,12 +31,14 @@ public class MusicController {
 	MusicService musicService;
 	
 	@RequestMapping("/musicNewest")
-	public String musicNewest(SearchCriteria cri,Model model,LikeMusicDTO likeMusic) throws Exception {
+	public String musicNewest(SearchCriteria cri,Model model,HttpServletRequest httpRequest) throws Exception {
 		log.info("최신음악 진입");
 		Pagination pagination = new Pagination();
 		pagination.setCri(cri);
 		pagination.setTotalCount(musicService.countNewMusic(cri));
 		List<MusicDTO> musicNewest = musicService.musicNewest(cri);
+		
+		
 		model.addAttribute("musicNewest",musicNewest);
 	    model.addAttribute("pagination", pagination);
 		
@@ -51,11 +58,34 @@ public class MusicController {
 		return "music/music_Top";
 	}
 	
+	@RequestMapping(value = "/liked",method = RequestMethod.GET)
+	public String musicLiked(MusicDTO music,Model model, HttpServletRequest httpRequest,@RequestParam(value = "music_idx")int music_idx) throws Exception {
+		String id = ((UserDTO) httpRequest.getSession().getAttribute("user")).getId();
+		LikeMusicDTO liked = new LikeMusicDTO();
+		liked.setMusic_idx(music_idx);
+		liked.setId(id);
+		musicService.insertMusicLike(liked);
+		log.info(">>>>>>>"+liked);
+        return "redirect:/musicNewest";
+	}
+	
+	
 	@RequestMapping("/musicWriteP")
 	public String musicWritePage() {
 		log.info("노래 등록 페이지");
 		return "music/music_write";
 	}
+	
+	//글상세페이지
+	@RequestMapping("/musicDetail")
+	public String boardDetail(MusicDTO music,@RequestParam("music_idx")int music_idx,Model model) throws Exception {
+		log.info("게시글상세 페이지");
+		music = musicService.musicDetail(music);
+		model.addAttribute("musicDetail",music);
+		return "music/music_detail";
+	}
+	
+	
 	
 	
 	@RequestMapping("/musicReq")
@@ -67,7 +97,7 @@ public class MusicController {
 	@RequestMapping("/musicWrite") //노래 등록
 	public String musicWrite( MusicDTO music,Model model) throws Exception {
 			musicService.musicCreate(music);
-        return "musicNewest";
+        return "/musicNewest";
 	}
 	
 	

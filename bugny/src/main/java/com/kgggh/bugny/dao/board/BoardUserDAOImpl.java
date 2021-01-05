@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kgggh.bugny.dto.BoardDTO;
 import com.kgggh.bugny.dto.Criteria;
+import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 
 
@@ -44,7 +45,7 @@ public class BoardUserDAOImpl implements BoardDAO {
 
 	@Override
 	public void boardDelete(int board_idx) {
-		sql.delete("board.boardDelete",board_idx);
+		sql.update("board.boardDelete",board_idx);
 		
 	}
 
@@ -52,6 +53,26 @@ public class BoardUserDAOImpl implements BoardDAO {
 	public void boardHit(int board_idx) {
 		sql.update("board.boardHit",board_idx);
 		
+	}
+
+	@Override
+	public List<ReplyDTO> replyList(int board_idx) throws Exception {
+		return sql.selectList("reply.replyList",board_idx);
+	}
+
+	@Override
+	public int replyCreate(ReplyDTO reply) throws Exception {
+		return sql.insert("reply.replyCreate",reply);
+	}
+
+	@Override
+	public int replyUpdate(ReplyDTO reply) throws Exception {
+		return sql.update("reply.replyUpdate",reply);
+	}
+
+	@Override
+	public int replyDelete(int reply_idx) throws Exception {
+		return sql.delete("reply.replyDelete",reply_idx);
 	}
 
 

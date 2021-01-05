@@ -11,6 +11,7 @@ public class BoardDTO {
 	    private int hit;
 	    private int liked;
 	    private Date regdate;
+	    private String display;
 		public int getBoard_idx() {
 			return board_idx;
 		}
@@ -59,10 +60,18 @@ public class BoardDTO {
 		public void setRegdate(Date regdate) {
 			this.regdate = regdate;
 		}
+		
+		public String getDisplay() {
+			return display;
+		}
+		public void setDisplay(String display) {
+			this.display = display;
+		}
 		@Override
 		public String toString() {
 			return "BoardDTO [board_idx=" + board_idx + ", category=" + category + ", title=" + title + ", contents="
-					+ contents + ", id=" + id + ", hit=" + hit + ", liked=" + liked + ", regdate=" + regdate + "]";
+					+ contents + ", id=" + id + ", hit=" + hit + ", liked=" + liked + ", regdate=" + regdate + ", display="
+					+ display + "]";
 		}
 	    
 		

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kgggh.bugny.dao.music.MusicDAO;
 import com.kgggh.bugny.dto.Criteria;
+import com.kgggh.bugny.dto.LikeMusicDTO;
 import com.kgggh.bugny.dto.MusicDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 
@@ -45,6 +46,27 @@ public class MusicServiceImpl implements MusicService {
 	@Override
 	public int countTopMusic() throws Exception {
 		return musicDAO.countTopMusic();
+	}
+	
+	
+	@Override
+    public void insertMusicLike(LikeMusicDTO liked) throws Exception {
+		musicDAO.insertMusicLike(liked);
+    }
+
+    @Override
+    public void deleteMusicLike(LikeMusicDTO liked) throws Exception {
+    	musicDAO.deleteMusicLike(liked);
+    }
+    
+    @Override
+    public  int getMusicLike(LikeMusicDTO liked) throws Exception {
+            return musicDAO.getMusicLike(liked);
+    }
+
+	@Override
+	public MusicDTO musicDetail(MusicDTO music) throws Exception {
+		return musicDAO.boardDetail(music);
 	}
 
 	

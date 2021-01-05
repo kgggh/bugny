@@ -63,6 +63,16 @@
 		LIMIT #{pageStart}, #{perPageNum}
 	</select> 
 	
+	<!--게시글 상세뷰 -->
+	<select id="musicDetail" resultType="music" parameterType="music" >
+		SELECT * 
+		FROM 
+			MUSIC
+		WHERE 
+			MUSIC_IDX = #{music_idx}
+	</select>
+	
+	
 	
 	<!-- 게시글쓰기 -->
 	<insert id="musicCreate" parameterType="music" useGeneratedKeys="true" keyProperty="music_idx" >

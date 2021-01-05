@@ -14,38 +14,7 @@
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="<c:url value="/resources/js/music.js" />"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-	<script type="text/javascript">
-	$(function(){
-		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-		$("#heart").click(function(){
-			$.ajax({
-				url: "/musicLiked",
-                type: "POST",
-                data: {
-                    no: ${content.board_no},
-                    id: '${id}'
-                },
-                success: function () {
-			        recCount();
-                },
-			})
-		})
-		
-		// 게시글 추천수
-	    function recCount() {
-			$.ajax({
-				url: "/expro/RecCount.do",
-                type: "POST",
-                data: {
-                    no: ${content.board_no}
-                },
-                success: function (count) {
-                	$(".rec_count").html(count);
-                },
-			})
-	    };
-	    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
-	</script>
+	
     <style type="text/css">
 		body{
 			padding-top: 150px;		
@@ -102,14 +71,9 @@
 							<tr>
 								<td>${music.album }</td>	
 								<td>${music.releaseDate }</td>
-								<td>${music.title }</td>
+								<td><a href="musicDetail?music_idx=<c:out value="${music.music_idx }"/>" >${music.title }</a></td>
 								<td>${music.singer }</td>
-								<c:if test="${not empty user}">
-								<td><i class="far fa-heart " id="heart"></i> ${music.likeCheck }</td>
-								</c:if>
-								<c:if test="${empty user}">
-								<td><i class="far fa-heart " id="heart"></i> ${music.likeCheck} </td>
-								</c:if>
+								<td><i class="far fa-heart " id="heart" > </i> ${music.likeCheck }</td>
 								<td><a href="${music.playURL }"onclick="window.open(this.href,'','width=500,height=500,scrollbars=no'); return false;"><i class="fab fa-youtube fa-3x"></i></a></td>
 							</tr>
 						</c:forEach>
@@ -170,5 +134,6 @@ var formObj = $("form[role='form']")
 				
 					});
 			});
-	</script>
+			
+</script>
 </html>

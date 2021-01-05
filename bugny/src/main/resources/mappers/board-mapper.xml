@@ -15,7 +15,7 @@
 	
 	<select id="boardList" resultType="board">
 		SELECT
-			BOARD_IDX, ID, CATEGORY, TITLE, CONTENTS, HIT, REGDATE
+			BOARD_IDX, ID, CATEGORY, TITLE, CONTENTS, HIT, REGDATE,DISPLAY
 		FROM 
 			BOARD
 		WHERE board_idx > 0 <include refid="search"></include>
@@ -59,7 +59,7 @@
 	
 	<!-- 게시글 수정 -->
 	<update id="boardUpdate" parameterType="board">
-		UPDATE board
+		UPDATE BOARD
 		SET
 			CATEGORY = #{category},
 			TITLE = #{title},
@@ -67,12 +67,15 @@
 		WHERE 
 			BOARD_IDX = #{board_idx}
 	</update>	
-	<delete id="boardDelete">
-		DELETE 
-			FROM BOARD
+	
+	<!-- 게시글 삭제 -->
+	<update id="boardDelete">
+		UPDATE 
+			BOARD
+		SET DISPLAY = "n"
 		WHERE 
 			BOARD_IDX = #{board_idx}
-	</delete>
+	</update>
 	
 	
 	<!--게시글 상세뷰 -->

@@ -8,7 +8,7 @@
 	<title>게시판</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/board.js" />"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
@@ -21,40 +21,150 @@
 			location.href="boardDelete?board_idx=${boardDetail.board_idx}";
 		});
 
-		$(function(){
-			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-			$("#rec_update").click(function(){
-				$.ajax({
-					url: "/board/likeUpdate",
-	                type: "POST",
-	                data: {
-	                    idx: ${board.board_idx},
-	                    id: '${id}'
-	                },
-	                success: function () {
-				        recCount();
-	                },
-				})
-			})
-			
-			// 게시글 추천수
-		    function recCount() {
-				$.ajax({
-					url: "/board/likeCount",
-	                type: "POST",
-	                data: {
-	                    idx: ${board.board_idx}
-	                },
-	                success: function (count) {
-	                	$("#heart").html(count);
-	                },
-	                error:
-	                	function (request, status, error){
-	                	alert("ajax실패")
-	                	}
-				})
-		    };
-		    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+		$(document).ready(function(){
+			showReplyList();
+		});
+
+
+		function showReplyList(){
+			var url = "${pageContext.request.contextPath}/restBoard/replyList";
+			var data = {"board_idx" : "${boardDetail.board_idx}"};
+			$.ajax({
+		           type: 'POST',
+		           url: url,
+		           data: data,
+		           dataType: 'json',
+		           success: function(result) {
+		              	var htmls = "";
+						if(result < 1){
+							htmls = "@@@@@@@@@####무플방지위원회-a-------------";
+						} else {
+				                    $(result).each(function(){
+				                     htmls += '<div class="media text-muted pt-3" id="reply_idx' + this.reply_idx + '">';
+				                     htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
+				                     htmls += '<title>Placeholder</title>';
+				                     htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
+				                     htmls += '<text x="50%" fill="#007bff" dy=".3em">32x32</text>';
+				                     htmls += '</svg>';
+				                     htmls += '<p class="media-body pb-3 mb-0 small lh-125 border-bottom horder-gray">';
+				                     htmls += '<span class="d-block">';
+				                     htmls += '<strong class="text-gray-dark">' + this.id + '</strong>';
+				                     htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+				                     htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + this.reply_idx + ', \'' + this.id + '\', \'' + this.contents + '\' )" style="padding-right:5px">수정</a>';
+				                     htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + this.reply_idx + ')" >삭제</a>';
+				                     htmls += '</span>';
+				                     htmls += '</span>';
+				                     htmls += this.contents;
+				                     htmls += '</p>';
+				                     htmls += '</div>';
+				                });
+						}
+						$("#replyList").html(htmls);
+			      }	
+			});
+		}
+
+		function fn_editReply(reply_idx, id, contents){
+			var htmls = "";
+			htmls += '<div class="media text-muted pt-3" id="reqply_idx' + reqply_idx + '">';
+			htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
+			htmls += '<title>Placeholder</title>';
+			htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
+			htmls += '<text x="50%" fill="#007bff" dy=".3em">32x32</text>';
+			htmls += '</svg>';
+			htmls += '<p class="media-body pb-3 mb-0 small lh-125 border-bottom horder-gray">';
+			htmls += '<span class="d-block">';
+			htmls += '<strong class="text-gray-dark">' + id + '</strong>';
+			htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+			htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + reply_idx + ', \'' + id + '\')" style="padding-right:5px">저장</a>';
+			htmls += '<a href="javascript:void(0)" onClick="showReplyList()">취소<a>';
+			htmls += '</span>';
+			htmls += '</span>';		
+			htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
+			htmls += contents;
+			htmls += '</textarea>';
+			htmls += '</p>';
+			htmls += '</div>';
+			$('#reqply_idx' + reqply_idx).replaceWith(htmls);
+			$('#reqply_idx' + reqply_idx + ' #editContent').focus();
+		}
+
+		
+		function fn_updateReply(reply_idx, id){
+			var url = "${pageContext.request.contextPath}/restBoard/replyUpdate";
+			var replyEditContent = $('#editContent').val();
+			var paramData = JSON.stringify({"contents": replyEditContent
+					, "reply_idx": reply_idx
+			});
+			var headers = {"Content-Type" : "application/json"
+					, "X-HTTP-Method-Override" : "POST"};
+			$.ajax({
+				url: "${updateReplyURL}"
+				, headers : headers
+				, data : paramData
+				, type : 'POST'
+				, dataType : 'text'
+				, success: function(result){
+	                                console.log(result);
+					showReplyList();
+				}
+				, error: function(error){
+					console.log("에러 : " + error);
+				}
+			});
+		}
+
+		function fn_deleteReply(reply_idx){
+			var url = "${pageContext.request.contextPath}/restBoard/replyDelete";
+			var paramData = {"reply_idx": reply_idx};
+			$.ajax({
+				url: url
+				, data : paramData
+				, type : 'POST'
+				, dataType : 'text'
+				, success: function(result){
+					showReplyList();
+				}
+				, error: function(error){
+					console.log("에러 : " + error);
+				}
+			});
+		}
+
+	
+
+		$(document).on('click', '#btnReplySave', function(){
+			var url = "${pageContext.request.contextPath}/restBoard/replyCreate";
+			var contents = $('#contents').val();
+			var id = "${user.id}";
+			var data = JSON.stringify({"contents": contents
+					, "id": id
+					, "board_idx":'${boardDetail.board_idx}'
+			});
+			var headers = {"Content-Type" : "application/json"
+					, "X-HTTP-Method-Override" : "POST"};
+			$.ajax({
+				url: url
+				, headers : headers
+				, data : data
+				, type : 'POST'
+				, dataType : 'text'
+				, success: function(result){
+					showReplyList();
+					
+					$('#contents').val('');
+					$('#id').val('');
+				}
+				, error: function(error){
+					console.log("에러 : " + error);
+				}
+			});
+		});
+
+	
+
+
+
 	</script>
 	<style type="text/css">
 		body{
@@ -96,7 +206,7 @@
 				          	<th class="active" colspan="2" >조회수</th>
 				            <td ><c:out value="${boardDetail.hit }"/></td>
 				            <th class="active" colspan="2">추천</th>
-				            <td colspan="2"><i class="far fa-heart " id="heart">${boardDetail.liked }</i></td>
+				            <td colspan="2"><i class="far fa-heart " id="heart"> ${boardDetail.liked }</i></td>
 				        </tr>
 				       	<tr>
 				            <th colspan="16">${boardDetail.contents}</th>
@@ -111,6 +221,32 @@
 				</c:if>
 				<button type="button" class="btn btn-md btn-secondary" id="btnList">목록</button>
 			</div>
+			
+			<!-- Reply Form {s} -->
+			<c:if test="${not empty user }">
+			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
+				<form name="form" id="form" role="form" method="post">
+				<input type="hidden" name="board_idx" id="board_idx" value="${boardDetail.board_idx }"/>
+				<div class="row">
+					<div class="col-sm-10">
+						<textarea name="contents" id="contents" class="form-control" rows="3" placeholder="댓글을 입력해 주세요"></textarea>
+					</div>
+					<div class="col-sm-2">
+						<input type="hidden" name="id" class="form-control" id="id" value="${user.id }" placeholder="댓글 작성자"></input>
+						<button type="button" class="btn btn-sm btn-secondary" id="btnReplySave" style="width: 100%; margin-top: 10px"> 저 장 </button>
+					</div>
+				</div>
+				</form>
+			</div>
+			</c:if>
+			<!-- Reply Form {e} -->
+			
+			<!-- Reply List {s}-->
+			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
+				<h6 class="border-bottom pb-2 mb-0">댓글들</h6>
+				<div id="replyList"></div>
+			</div> 
+			<!-- Reply List {e}-->
 		</div>
 	</article>
 </body>

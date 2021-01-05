@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.kgggh.bugny.dto.BoardDTO;
 import com.kgggh.bugny.dto.Criteria;
+import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 import com.kgggh.bugny.service.board.BoardService;
 import com.kgggh.bugny.util.FileUpload;
@@ -78,14 +79,14 @@ public class BoardController {
 	public String boardUpdate(BoardDTO board,Model model) throws Exception {
 		boardService.boardUpdate(board);
 		System.out.println(">>>>>>>>board" + board);
-		return "redirect:/boardPage";
+		return "redirect:/boardList";
 	}
 	
 	//글삭제
 	@RequestMapping("/boardDelete")
 	public String boardDelete(@RequestParam("board_idx") int board_idx,Model model) throws Exception {
 		boardService.boardDelete(board_idx);
-		return "redirect:/boardPage";
+		return "redirect:/boardList";
 		}
 	
 	//글상세페이지
@@ -95,6 +96,7 @@ public class BoardController {
 		boardService.boardHit(board_idx);
 		board = boardService.boardDetail(board);
 		model.addAttribute("boardDetail",board);
+		model.addAttribute("reply", new ReplyDTO());
 		return "board/board_detail";
 	}
 	

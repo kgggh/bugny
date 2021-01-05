@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kgggh.bugny.dao.board.BoardDAO;
 import com.kgggh.bugny.dto.BoardDTO;
 import com.kgggh.bugny.dto.Criteria;
+import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 
 
@@ -18,7 +19,7 @@ import com.kgggh.bugny.dto.SearchCriteria;
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	private BoardDAO boardDAO ;
+	private BoardDAO boardDAO;
 	
 	@Override
 	public int countBoard(SearchCriteria cri) throws Exception {
@@ -56,6 +57,26 @@ public class BoardServiceImpl implements BoardService {
 	public void boardHit(int board_idx) throws Exception {
 		boardDAO.boardHit(board_idx);
 		
+	}
+
+	@Override
+	public List<ReplyDTO> replyList(int board_idx) throws Exception {
+		return boardDAO.replyList(board_idx);
+	}
+
+	@Override
+	public int replyCreate(ReplyDTO reply) throws Exception {
+		return boardDAO.replyCreate(reply);
+	}
+
+	@Override
+	public int replyUpdate(ReplyDTO reply) throws Exception {
+		return boardDAO.replyUpdate(reply);
+	}
+
+	@Override
+	public int replyDelete(int reply_idx) throws Exception {
+		return boardDAO.replyDelete(reply_idx);
 	}
 
 	

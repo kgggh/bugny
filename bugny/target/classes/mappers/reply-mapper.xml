@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+	<select id="replyList" resultType="reply">
+		SELECT *
+		FROM
+			REPLY
+		WHERE
+			BOARD_IDX = #{board_idx}
+		ORDER BY REGDATE DESC
+	</select>
+	
+	<insert id="replyCreate" parameterType="reply" useGeneratedKeys="true" keyProperty="reply_idx">
+		INSERT INTO REPLY(BOARD_IDX,CONTENTS,ID,REGDATE)
+		VALUES (
+			#{board_idx}
+			, #{contents}
+			, #{id}
+			, now()
+		)
+	</insert>
+
+	<update id="replyUpdate" parameterType="reply">
+		UPDATE REPLY SET
+			CONTENTS = #{contents}
+			,REGDATE = now()
+		WHERE
+			REPLY_IDX = #{reply_idx}
+	</update>
+
+	<delete id="replyDelete" parameterType="int">
+		DELETE FROM REPLY
+		WHERE
+			REPLY_IDX = #{reply_idx}
+	</delete>
+</mapper>

@@ -66,9 +66,9 @@
 						</tr>
 				</thead>
 				<tbody>
-					<tr>
-					<c:if test="${not empty boardList }">
-						<c:forEach var="board" items="${boardList }">
+					<c:forEach var="board" items="${boardList }">
+						<c:choose>
+							<c:when test="${board.display eq 'y' }">
 							<tr>
 								<td>${board.board_idx }</td>
 								<td>${board.category }</td>	
@@ -77,14 +77,19 @@
 								<td>${board.regdate }</td>
 								<td>${board.hit }</td>
 							</tr>
-						</c:forEach>
-					</c:if>
+							</c:when>
+							<c:otherwise>
+								<tr> 
+									<td colspan="6">삭제된 게시글입니다. </td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 					<c:if test="${empty boardList }">
 							<tr>
 								<td colspan="6">등록된 게시글이 없습니다.</td>
 							</tr>
 					</c:if>
-					</tr>
 				</tbody>
 			</table>
 			<div class="justify-content-end" align="right" id="btn">
