@@ -15,21 +15,6 @@
 	<script src="<c:url value="/resources/js/music.js" />"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<script type="text/javascript">
-	$(function(){
-		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-		$(".heart").click(function(){
-			$.ajax({
-				url: "/musicLiked",
-                type: "POST",
-                data: {
-                    no: ${music.music_idx},
-                    id: '${id}'
-                },
-                success: function () {
-                	$(".rec_count").html(count);
-                },
-			})
-		})
 	</script>
     <style type="text/css">
 		body{
@@ -38,9 +23,6 @@
 		#table td {
 			vertical-align: middle;
 			text-align: center;
-		}
-		.heart{
-			cursor:pointer;
 		}
 	</style>
 </head>
@@ -88,7 +70,7 @@
 			<div class="justify-content-end" align="right" id="btn">
 				<c:if test="${user.id eq 'admin'}">
 				<button type="button" class="btn btn-md btn-secondary pull-right" id="musicWriteP">
-					글작성
+					음악등록
 				</button>
 				</c:if>
 			</div>

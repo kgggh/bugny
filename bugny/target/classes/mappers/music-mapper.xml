@@ -15,7 +15,6 @@
 		    SELECT 
 				COUNT(*) AS MUSICTOP
 			FROM MUSIC
-			
 	</select>
 	
  	<!-- 페이징(검색) 처리 후 음악 조회(최신곡) -->
@@ -65,11 +64,14 @@
 	
 	<!--게시글 상세뷰 -->
 	<select id="musicDetail" resultType="music" parameterType="music" >
-		SELECT * 
+		SELECT
+			M.*,IFNULL(SUM(LIKED.LIKECHECK), 0 ) AS LIKECHECK
 		FROM 
-			MUSIC
+			MUSIC M
+		LEFT JOIN LIKE_MUSIC LIKED
+       		ON M.MUSIC_IDX = LIKED.MUSIC_IDX
 		WHERE 
-			MUSIC_IDX = #{music_idx}
+			M.MUSIC_IDX =#{music_idx}
 	</select>
 	
 	

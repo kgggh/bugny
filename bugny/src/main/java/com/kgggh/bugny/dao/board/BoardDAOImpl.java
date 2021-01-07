@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgggh.bugny.dto.BoardDTO;
-import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 
 
 @Repository("boardDAO")
-public class BoardUserDAOImpl implements BoardDAO {
+public class BoardDAOImpl implements BoardDAO {
 
 	@Autowired
 	SqlSession sql;

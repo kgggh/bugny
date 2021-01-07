@@ -9,15 +9,6 @@
 			LIKE_MUSIC(MUSIC_IDX,ID)
 		VALUES(#{music_idx},#{id})
 	</insert>
-
-	<!-- <select id="read" resultType="likeMusic">
-		SELECT IFNULL(SUM(LM.LIKECHECK),0 ) AS 'likedCnt'
-		FROM
-			LIKE_MUSIC AS LM
-		WHERE
-			LM.music_idx = #{music_idx}
-			AND LM.id= #{id}
-	</select> -->
 	
 	<delete id="unLikeMusic">
 		DELETE FROM LIKE_MUSIC
@@ -33,8 +24,14 @@
         WHERE MUSIC_IDX = #{music_idx}
     </select> 
 
-    <select id="likeList" resultType="int">
-        SELECT COUNT(like_idx) FROM like_music WHERE music_idx = #{music_idx} AND id = #{id};
+    <select id="likeList" resultType="map">
+        SELECT 
+        	LIKECHECK 
+		FROM
+			LIKE_MUSIC 
+		WHERE 
+			MUSIC_IDX = #{music_idx} AND ID= #{id}
     </select>
+    
 	
 </mapper>

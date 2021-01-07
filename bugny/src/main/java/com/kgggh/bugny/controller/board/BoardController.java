@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.kgggh.bugny.dto.BoardDTO;
-import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 import com.kgggh.bugny.service.board.BoardService;
@@ -33,7 +32,6 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
-	
 	
 	@RequestMapping(value = "/boardList",method = RequestMethod.GET)
 	public String boardList(Model model,SearchCriteria cri) throws Exception{

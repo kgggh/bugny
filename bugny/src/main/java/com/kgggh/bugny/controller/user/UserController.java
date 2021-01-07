@@ -110,7 +110,7 @@ public class UserController {
 		model.addAttribute("msg","수정 완료");
 		model.addAttribute("url","/home");
 		
-		return "redirect";
+		return "redirect:/myPage";
 	}
 	
 	

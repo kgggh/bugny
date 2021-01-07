@@ -39,10 +39,13 @@
 			<p>최근 접속일 : <fmt:formatDate value="${user.logTime }" type="Date" pattern="yyyy-MM dd:hh:mm"/> </p>
 			<button type="button" class="btn btn-secondary "  id="userUpdatePage">
 				정보수정
-			</button>
-			<p>내가 쓴글</p>
-			<p>추천 누른 글</p>
-			<p>추천 누른 음악</p>
+			</button><br>
+			<span>내가쓴 게시물</span>
+			<div></div>
+			<span>내가쓴 댓글</span>
+			<div></div>
+			<span>좋아요한 게시물</span>
+			<div></div>
 			
 			
 		</div>

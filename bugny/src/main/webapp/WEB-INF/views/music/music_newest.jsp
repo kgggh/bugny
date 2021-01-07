@@ -23,9 +23,7 @@
 			vertical-align: middle;
 			text-align: center;
 		}
-		#heart{
-			cursor:pointer;
-		}
+		
 	</style>
 </head>
 <body>
@@ -88,7 +86,7 @@
 			<div class="justify-content-end" align="right" id="btn">
 				<c:if test="${user.id eq 'admin'}">
 				<button type="button" class="btn btn-md btn-secondary pull-right" id="musicWriteP">
-					글작성
+					음악등록
 				</button>
 				</c:if>
 			</div>

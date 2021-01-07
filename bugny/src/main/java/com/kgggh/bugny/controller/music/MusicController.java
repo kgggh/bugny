@@ -1,6 +1,8 @@
 package com.kgggh.bugny.controller.music;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,12 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.LikeMusicDTO;
 import com.kgggh.bugny.dto.MusicDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
-import com.kgggh.bugny.dto.UserDTO;
 import com.kgggh.bugny.service.music.MusicService;
 import com.kgggh.bugny.util.Pagination;
 
@@ -57,19 +59,7 @@ public class MusicController {
 	    model.addAttribute("pagination", pagination);
 		return "music/music_Top";
 	}
-	
-	@RequestMapping(value = "/liked",method = RequestMethod.GET)
-	public String musicLiked(MusicDTO music,Model model, HttpServletRequest httpRequest,@RequestParam(value = "music_idx")int music_idx) throws Exception {
-		String id = ((UserDTO) httpRequest.getSession().getAttribute("user")).getId();
-		LikeMusicDTO liked = new LikeMusicDTO();
-		liked.setMusic_idx(music_idx);
-		liked.setId(id);
-		musicService.insertMusicLike(liked);
-		log.info(">>>>>>>"+liked);
-        return "redirect:/musicNewest";
-	}
-	
-	
+		
 	@RequestMapping("/musicWriteP")
 	public String musicWritePage() {
 		log.info("노래 등록 페이지");
@@ -86,8 +76,6 @@ public class MusicController {
 	}
 	
 	
-	
-	
 	@RequestMapping("/musicReq")
 	public String musicRequest() {
 		log.info("노래 요청 페이지");
@@ -99,6 +87,21 @@ public class MusicController {
 			musicService.musicCreate(music);
         return "/musicNewest";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getLiked",method = RequestMethod.POST)
+	public Map<String, Object> getPage(LikeMusicDTO liked,Model model) throws Exception{
+		Map<String, Object> result = new HashMap<>();
+		try {
+		musicService.getMusicLike(liked);
+		result.put("status", "OK");
+		} catch (Exception e) {
+		e.printStackTrace();
+		result.put("status", "False");
+		}
+		return result;
+		}
+	
 	
 	
 	

@@ -36,7 +36,7 @@ public class Pagination {
 	        calcData();
 	    }
 	    
-	    private void calcData() {
+	    public void calcData() {
 	        
 	        endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 	        

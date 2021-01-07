@@ -60,7 +60,7 @@ public class MusicServiceImpl implements MusicService {
     }
     
     @Override
-    public  int getMusicLike(LikeMusicDTO liked) throws Exception {
+    public int getMusicLike(LikeMusicDTO liked) throws Exception {
             return musicDAO.getMusicLike(liked);
     }
 

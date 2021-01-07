@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.kgggh.bugny.dao.board.BoardDAO;
 import com.kgggh.bugny.dto.BoardDTO;
-import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 

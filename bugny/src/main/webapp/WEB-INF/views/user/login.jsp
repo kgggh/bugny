@@ -50,10 +50,10 @@
 					<input type="password" name="password" placeholder="비밀번호를 입력해 주세요." class="form-control" id="password" required/>
 				</div>
 				<div class="check_font" id="id_password"></div>
-				<div class="interval_height a_none">
+				<div class="interval_height a_none text-center">
 					<a href="${pageContext.request.contextPath}/user/userSearch">&nbsp; 아이디 / 비밀번호 찾기</a>
 				</div>
-				<div class="selectBtn" style="margin-top: 50px;">
+				<div class="selectBtn text-center" style="margin-top: 10px;">
 				<button type="submit" class="btn btn-secondary "  id="login">
 					로그인
 				</button>

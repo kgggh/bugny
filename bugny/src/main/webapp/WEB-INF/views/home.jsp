@@ -12,7 +12,8 @@
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="resources/js/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript">
+	</script>
 	<style type="text/css">
 		body{
 			padding-top: 150px;
@@ -45,7 +46,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><a href="#">표시될 제목입니다,,,.~</a></td>
+                                            <td><a href="#" id="title">표시될 제목입니다,,,.~</a></td>
                                         </tr>
                                     </tbody>
                                 </table>

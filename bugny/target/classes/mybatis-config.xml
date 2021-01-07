@@ -9,6 +9,7 @@
   		<typeAlias alias="reply" type="com.kgggh.bugny.dto.ReplyDTO"/>
   		<typeAlias alias="music" type="com.kgggh.bugny.dto.MusicDTO"/>
   		<typeAlias alias="likeMusic" type="com.kgggh.bugny.dto.LikeMusicDTO"/>
+  		<typeAlias alias="reqMusic" type="com.kgggh.bugny.dto.ReqMusicDTO"/>
   </typeAliases>
   
   <mappers>
@@ -17,6 +18,7 @@
   		<mapper resource="mappers/reply-mapper.xml"/>
   		<mapper resource="mappers/music-mapper.xml"/>
   		<mapper resource="mappers/likeMusic-mapper.xml"/>
+  		<mapper resource="mappers/reqMusic-mapper.xml"/>
   </mappers>
   
 </configuration>

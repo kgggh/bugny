@@ -29,10 +29,7 @@
 				  <a class="nav-link" href="musicNewest">최신음악</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="musicReq">음악요청</a>
-				</li>
-				<li class="nav-item">
-				  <a class="nav-link" href="recomCafe">추천카페(업뎃중)</a>
+				  <a class="nav-link" href="reqMusicList">음악요청</a>
 				</li>
 				<li class="nav-item">
 				  <a class="nav-link" href="boardList">자유게시판(구현)</a>

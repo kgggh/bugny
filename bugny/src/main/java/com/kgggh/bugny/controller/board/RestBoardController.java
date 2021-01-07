@@ -1,5 +1,6 @@
 package com.kgggh.bugny.controller.board;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.service.board.BoardService;
 
-@RequestMapping(value = "/restBoard")
 @RestController
+@RequestMapping(value = "/restBoard")
 public class RestBoardController {
 	
 	@Autowired
@@ -57,7 +58,6 @@ public class RestBoardController {
 	
 	@RequestMapping(value = "/replyDelete", method = {RequestMethod.GET, RequestMethod.POST})
 	public Map<String, Object> replyDelete(@RequestParam("reply_idx") int reply_idx) throws Exception {
-
 		Map<String, Object> result = new HashMap<>();
 		try {
 		boardService.replyDelete(reply_idx);

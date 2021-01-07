@@ -24,10 +24,10 @@
 		#subTitle{
 			padding-bottom: 50px;
 		}
-		
 	</style>
 </head>
 <body>
+<%@include file="../common/header.jsp" %>
 <div class="container" role="main">
 	<h3 class="text-center text-muted " id="subTitle">
 		음악등록

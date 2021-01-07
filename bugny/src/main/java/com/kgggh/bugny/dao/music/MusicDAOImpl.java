@@ -50,7 +50,10 @@ public class MusicDAOImpl implements MusicDAO {
 	public List<MusicDTO> musicTop(Criteria cri) throws Exception {
 		return sql.selectList("music.musicTop",cri);
 	}
-	
+	@Override
+	public MusicDTO boardDetail(MusicDTO music) throws Exception {
+		return sql.selectOne("music.musicDetail",music);
+	}
 	
 	@Override
     public int getMusicLike(LikeMusicDTO liked) throws Exception {
@@ -72,10 +75,7 @@ public class MusicDAOImpl implements MusicDAO {
     	sql.update("likmeMusic.updateLike",music_idx);
     }
 
-	@Override
-	public MusicDTO boardDetail(MusicDTO music) throws Exception {
-		return sql.selectOne("music.musicDetail",music);
-	}
+	
 	
 	
 

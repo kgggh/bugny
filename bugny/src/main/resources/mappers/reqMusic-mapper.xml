@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reqMusic">
+
+	<select id="reqCount" resultType="int">
+		SELECT 
+			COUNT(req_idx)AS REQCNT
+		FROM
+			REQ_MUSIC
+	</select>
+	
+	
+	<select id="reqList" resultType="reqMusic">
+		SELECT 
+			REQ_IDX,CONTENTS,ID,DATE_FORMAT(REGDATE, '%Y-%m-%d %H:%i:%s') AS REGDATE
+		FROM 
+			REQ_MUSIC
+		ORDER BY REGDATE DESC 
+		LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	<insert id="reqCreate" parameterType="reqMusic" useGeneratedKeys="true" keyProperty="req_idx">
+		INSERT INTO REQ_MUSIC(REQ_IDX,CONTENTS,ID)
+		VALUES (
+			#{req_idx}
+			, #{contents}
+			, #{id}
+		)
+	</insert>
+
+	<update id="reqUpdate" parameterType="reqMusic">
+		UPDATE REQ_MUSIC SET
+			CONTENTS = #{contents}
+		WHERE
+			REPLY_IDX = #{rep_idx}
+	</update>
+
+	<delete id="reqDelete" parameterType="int">
+		DELETE FROM REQ_MUSIC
+		WHERE
+			REQ_IDX = #{req_idx}
+	</delete>
+	
+	<select id="testList" resultType="reqMusic">
+		SELECT 
+			REQ_IDX,CONTENTS,ID,DATE_FORMAT(REGDATE, '%Y-%m-%d %H:%i:%s') AS REGDATE
+		FROM 
+			REQ_MUSIC
+		ORDER BY REGDATE DESC 
+		LIMIT #{start}, #{end}
+	</select>
+
+</mapper>
