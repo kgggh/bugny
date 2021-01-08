@@ -44,14 +44,6 @@ public class ReqMusicrDAOImpl implements ReqMusicDAO {
 		return sql.delete("reqMusic.reqDelete",req_idx);
 	}
 
-	@Override
-	public List<ReqMusicDTO> testList(int start, int end) throws Exception {
-		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("start", start);
-		map.put("end", end);
-		return sql.selectList("reqMusic.testList", map);
-	}
-	
 
 
 

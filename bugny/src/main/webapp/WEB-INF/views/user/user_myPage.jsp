@@ -5,55 +5,74 @@
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	
 	<title>마이페이지</title>
+	<link rel="stylesheet" type="text/css"href="resources/css/reset.css">
+	<link rel="stylesheet" type="text/css"href="resources/css/register.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+	
 	<link rel="stylesheet" type="text/css"href="resources/css/login.css">
-	<script type="text/javascript">
-	$(document).ready(function(){
-	  	  $("#userUpdatePage").on("click", function(){
-	  	    location.href = 'userUpdatePage';
-	  	  });  
-	  	
-	  	});
-	</script>
 	<style type="text/css">
 		body{
 			padding-top: 150px;
 		}
 	</style>
 </head>
-<body>
 <%@include file="../common/header.jsp" %>
+<body>
+			
 <div class="container">
-<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="text-center text-muted">
-				My Page
-			</h3>
 			<p>${user.id }님 환영합니다.</p>
 			<p>최근 접속일 : <fmt:formatDate value="${user.logTime }" type="Date" pattern="yyyy-MM dd:hh:mm"/> </p>
-			<button type="button" class="btn btn-secondary "  id="userUpdatePage">
-				정보수정
-			</button><br>
-			<span>내가쓴 게시물</span>
-			<div></div>
-			<span>내가쓴 댓글</span>
-			<div></div>
-			<span>좋아요한 게시물</span>
-			<div></div>
-			
-			
+			<h3 class="text-center text-muted">
+				My Page(회원정보수정)
+			</h3>
+			<form role="form1" action="userUpdate" class="form1" method="post">
+				<div class="form-group">
+					<label for="id">아이디</label>
+					<input type="text" name="id" id="id" value="${user.id }" class="form-control" readonly="readonly"/>
+				</div>
+				<div class="form-group">
+					<label for="password">비밀번호</label>
+					<input type="password" name="password" id="password" placeholder="변경하실 비밀번호를 입력해주세요." class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="name">이름</label>
+					<input type="text" name="name" id="name" value="${user.name }" readonly="readonly" placeholder="이름을 입력해 주세요." class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="birth">생년월일</label>
+					<input type="text" name="birth" id="birth" value="${user.birth }" readonly="readonly" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="email">이메일</label>
+					<input type="text" name="email"id="email" value="${user.email }" placeholder="이메일을 입력해 주세요." class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="address">주소</label>
+					<input type="text" name="address" id="address" value="${user.address }" placeholder="주소를 입력해 주세요." class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="phone">핸드폰</label>
+					<input type="text" name="phone" id="phone" value="${user.phone }" placeholder="핸드폰번호를 입력해 주세요." class="form-control" />
+				</div>
+				<div class="selectDiv">
+					<button type="submit"  class="btn btn-md btn-secondary " id="userUpdate">
+						수정
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
-</div>
 
 </body>
+<script src="<c:url value="/resources/js/jquery.validate.min.js" />"></script>
+<script src="<c:url value="/resources/js/validate.js" />"></script>
 </html>
 
 

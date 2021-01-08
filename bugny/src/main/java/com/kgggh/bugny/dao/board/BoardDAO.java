@@ -3,7 +3,6 @@ package com.kgggh.bugny.dao.board;
 import java.util.List;
 
 import com.kgggh.bugny.dto.BoardDTO;
-import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 

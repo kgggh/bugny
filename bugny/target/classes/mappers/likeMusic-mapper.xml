@@ -3,35 +3,5 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="likeMusic">
-
-	<insert id="likeMusic" parameterType="LikeMusic" useGeneratedKeys="true" keyProperty="like_idx" >
-		INSERT INTO 
-			LIKE_MUSIC(MUSIC_IDX,ID)
-		VALUES(#{music_idx},#{id})
-	</insert>
-	
-	<delete id="unLikeMusic">
-		DELETE FROM LIKE_MUSIC
-		WHERE BNO = #{music_idx} AND id = #{id}
-	</delete>
-
-   <select id="updateLike">
-        UPDATE MUSIC
-        SET
-        LIKED = (SELECT COUNT(*)
-        FROM LIKE_MUSIC
-        WHERE MUSIC_IDX = #{music_idx})
-        WHERE MUSIC_IDX = #{music_idx}
-    </select> 
-
-    <select id="likeList" resultType="map">
-        SELECT 
-        	LIKECHECK 
-		FROM
-			LIKE_MUSIC 
-		WHERE 
-			MUSIC_IDX = #{music_idx} AND ID= #{id}
-    </select>
-    
 	
 </mapper>

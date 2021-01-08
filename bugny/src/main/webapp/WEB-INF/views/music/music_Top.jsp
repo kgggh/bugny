@@ -37,26 +37,24 @@
 			<table class="table table-hover text-center" id="table">
 				<thead>
 						<tr> 
-							<th style="width: 10%">순위</th>
+							<th style="width: 5%">순위</th>
 							<th style="width: 10%">앨범</th>
 							<th style="width: 10%">발매일</th>
-							<th style="width: 30%">제목</th>
-							<th style="width: 20%">가수</th>
-							<th style="width: 10%">좋아요</th>
-							<th style="width: 10%"></th>
+							<th style="width: 40%">제목</th>
+							<th style="width: 25%">가수</th>
+							<th style="width: 10%">조회수</th>
 						</tr>
 				</thead>
 				<tbody>
 				<c:if test="${not empty musicTop }">
 					<c:forEach var="music" items="${musicTop }">
 						<tr>
-							<td>${count }</td>
+							<td>${rank }</td>
 							<td>${music.album }</td>	
 							<td>${music.releaseDate }</td>
 							<td><a href="musicDetail?music_idx=<c:out value="${music.music_idx }"/>" >${music.title }</a></td>
 							<td>${music.singer }</td>
-							<td><i class="far fa-heart " id="heart" > </i> ${music.likeCheck }</td>
-							<td><a href="${music.playURL }"onclick="window.open(this.href,'','width=500,height=500,scrollbars=no'); return false;"><i class="fab fa-youtube fa-3x"></i></a></td>
+							<td><i class="far fa-heart " id="heart" > </i> ${music.hit }</td>
 						</tr>
 					</c:forEach>
 				</c:if>

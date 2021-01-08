@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kgggh.bugny.dao.board.BoardDAO;
 import com.kgggh.bugny.dto.BoardDTO;
+import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 
@@ -77,11 +78,6 @@ public class BoardServiceImpl implements BoardService {
 	public int replyDelete(int reply_idx) throws Exception {
 		return boardDAO.replyDelete(reply_idx);
 	}
-
-	
-	
-
-
 
 	
 

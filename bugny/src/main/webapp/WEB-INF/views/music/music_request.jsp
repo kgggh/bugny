@@ -18,47 +18,42 @@
     <script type="text/javascript">
     
     $(document).ready(function(){
-    	showReqList(url);
-    	
+        var page= 1;
+    	$("#paging").on("click", "li a", function(event) {
+    		event.originalEvent.preventDefault();
+		});
+    	showReqList();
+		
 	});
 
-   
-    var printPaging = function(page) {
+    var printPaging = function printPaging(page) {
  		var str = "";
-
  		if(page.prev) {
- 			str += "<li class='page-item'><a class='page-link' href= '" + (page.startPage -1) + "'> Prev </a></li>";
+ 			str += "<li class='page-item'><a class='page-link' onclick=reqPageList("+(page.startPage -1)+") href= '" + (page.startPage -1) + "'> Prev </a></li>";
  		}
 
  		for(var i = page.startPage, len = page.endPage; i <= len; i++) {
  			var classStr = page.cri.page == i ? 'active' : '';
- 			str += '<li class="page-item ' + classStr + ' + "><a class="page-link"  href= "getReqList?=page?'+ i +'">' + i + '</a> </li>';
+ 			str += '<li class="page-item ' + classStr + ' + "><a class="page-link" onclick=reqPageList('+i+') href= "'+ i +'">' + i + '</a> </li>';
  		}
  		if(page.next) {
- 			str += "<li class='page-item'><a class='page-link'   href='getReqList?=page?" + (page.endPage +1) + "'> Next </a></li>";
+ 			str += "<li class='page-item'><a class='page-link' onclick= reqPageList("+(page.endPage +1)+") href='" + (page.endPage +1) + "'> Next </a></li>";
  		}
  		$("#paging").html(str);
  	};
+    
 
- 	$("#paging").on("click", "li a", function(event) {
-		event.originalEvent.preventDefault();
-		pageNum = $(this).attr("href");
-		
-	});
- 	
-
- 	
- 	var url = "getReqList?=page"
-	function showReqList(url){
-		
+    function reqPageList(page){
 		$.ajax({
-	           type: 'GET',
-	           url: url,
+	           url: "${pageContext.request.contextPath}/reqPageList",
+	           type: 'POST',
+	           data: {
+					"page" : page
+		           },
 	           dataType: 'json',
 	           success: function(data) {
-		           console.log(data);
-	        	   var htmls = "";
-		           if(data.list.length < 1){
+	        	  var htmls = "";
+		          if(data.list.length < 1){
 			           htmls = "<tr><td colspan="+6+">게시글이 없습니다.<td></tr>" ;
 			      } else {
 	        	   		$(data.list).each(function() {
@@ -68,9 +63,39 @@
 			    	}
 				$("#tbody").html(htmls);
 				printPaging(data.page);
-		      }	
+		      }	, error: function(error){
+					console.log("에러 : " + error);
+				}
+		});
+    }
+
+    
+
+	function showReqList(){
+		$.ajax({
+	           url: "${pageContext.request.contextPath}/getReqList",
+	           dataType: 'json',
+	           type: "GET",
+	           success: function(data) {
+	        	   var htmls = "";
+		           if(data.list.length < 1){
+			           htmls = "<tr><td colspan="+6+">게시글이 없습니다.<td></tr>" ;
+			      } else {
+	        	   		$(data.list).each(function() {
+						htmls += '<tr id="req_idx' + this.req_idx + '"><td>'+ this.contents +' </td>  <td>'+ this.id +' </td>';
+		        	   	htmls += '<td>'+ this.regdate +' <a href="javascript:void(0)" onclick="fn_deleteReply(' + this.req_idx + ', \'' + this.id + '\')" > <i class="fas fa-trash"></i> </a> </td></tr>'
+		                   	});
+			    	}
+				$("#tbody").html(htmls);
+				printPaging(data.page);
+		      }	, error: function(error){
+					console.log("에러 : " + error);
+				}
+		 	
 		});
 	}
+
+	
 
     
 	  $(document).on('click', '#btnReqSave', function(){
@@ -171,7 +196,6 @@
 							<th style="width: 70%">내용</th>
 							<th style="width: 10%">작성자</th>
 							<th style="width: 20%">작성일</th>
-							
 						</tr>
 				</thead>
 				<tbody id="tbody">

@@ -6,20 +6,22 @@
 
 	<select id="countNewMusic" resultType="int">
 		SELECT 
-			COUNT(MUSIC_IDX)AS MUSICNEWEST
-		FROM MUSIC
-		WHERE music_idx > 0 <include refid="search"></include>
+			COUNT(*)AS MUSICNEWEST 
+		FROM MUSIC 
+		WHERE
+			music_idx > 0 <include refid="search"></include>
 	</select>
+	
  	
 	<select id="countTopMusic" resultType="int">
 		    SELECT 
-				COUNT(*) AS MUSICTOP
+				COUNT(*) AS MUSICTOP 
 			FROM MUSIC
 	</select>
 	
- 	<!-- 페이징(검색) 처리 후 음악 조회(최신곡) -->
+ 	<!-- 페이징(검색) 처리 후 음악 조회(최신곡)[좋아요 순 업데이트 해보고 나중에] -->
  	
-	<select id="musicNewest" resultType="music">
+	<!-- <select id="musicNewest" resultType="music">
 		SELECT
 			M.*,IFNULL(SUM(LIKED.LIKECHECK), 0 ) AS LIKECHECK
 		FROM 
@@ -32,7 +34,22 @@
         ORDER BY RELEASEDATE DESC
 		LIMIT #{pageStart}, #{perPageNum}
         
-	</select> 
+	</select>  -->
+	
+	<!-- 페이징(검색) 처리 후 음악 조회(최신곡)[조회 순] -->
+	<select id="musicNewest" resultType="music">
+		SELECT
+			MUSIC_IDX,TITLE,SINGER,RELEASEDATE,ALBUM,PLAYURL,HIT
+		FROM 
+			MUSIC
+		WHERE
+			music_idx  > 0 
+		<include refid="search"></include>
+        ORDER BY RELEASEDATE DESC
+		LIMIT #{pageStart}, #{perPageNum}
+        
+	</select>
+	
 	
 	<sql id="search">
 		<if test="searchType != null">
@@ -46,9 +63,9 @@
 	</sql>
 	
 	
- 	<!-- 페이징 처리 후 음악 조회(top100) -->
+ 	<!-- 페이징 처리 후 음악 조회(top100) [좋아요 순 업데이트 해보고 나중에] -->
  	
-	<select id="musicTop" resultType="music">
+<!-- 	<select id="musicTop" resultType="music">
 		SELECT
 			M.*,IFNULL(SUM(LIKED.LIKECHECK), 0 ) AS LIKECHECK
 		FROM 
@@ -60,7 +77,27 @@
 		GROUP BY MUSIC_IDX
 		ORDER BY LIKECHECK DESC 
 		LIMIT #{pageStart}, #{perPageNum}
-	</select> 
+	</select>  -->
+	
+	<!-- 음악 조회(TOP100)[조회 순] -->
+	<select id="musicTop" resultType="music">
+		SELECT
+			*
+		FROM 
+			MUSIC
+		WHERE 
+			MUSIC_IDX > 0
+		ORDER BY HIT DESC 
+		LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	<update id="musicHit">
+		UPDATE 
+			MUSIC
+		SET
+			HIT = HIT + 1	
+		WHERE music_idx = #{music_idx}
+	</update>
 	
 	<!--게시글 상세뷰 -->
 	<select id="musicDetail" resultType="music" parameterType="music" >
@@ -91,4 +128,6 @@
 		WHERE 
 			MUSIC_IDX = #{music_idx}
 	</delete>
+	
+	
 </mapper>

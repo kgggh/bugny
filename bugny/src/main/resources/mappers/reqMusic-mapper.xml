@@ -42,14 +42,5 @@
 		WHERE
 			REQ_IDX = #{req_idx}
 	</delete>
-	
-	<select id="testList" resultType="reqMusic">
-		SELECT 
-			REQ_IDX,CONTENTS,ID,DATE_FORMAT(REGDATE, '%Y-%m-%d %H:%i:%s') AS REGDATE
-		FROM 
-			REQ_MUSIC
-		ORDER BY REGDATE DESC 
-		LIMIT #{start}, #{end}
-	</select>
 
 </mapper>

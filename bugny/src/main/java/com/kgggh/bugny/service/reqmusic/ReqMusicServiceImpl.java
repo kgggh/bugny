@@ -44,10 +44,6 @@ public class ReqMusicServiceImpl implements ReqMusicService {
 		return reqMusicDAO.ReqMusiDelete(req_idx);
 	}
 
-	@Override
-	public List<ReqMusicDTO> testList(int start, int end) throws Exception {
-		return reqMusicDAO.testList(start, end);
-	}
 
 	
 

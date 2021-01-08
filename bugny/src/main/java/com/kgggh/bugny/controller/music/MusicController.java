@@ -1,8 +1,6 @@
 package com.kgggh.bugny.controller.music;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,12 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgggh.bugny.dto.Criteria;
-import com.kgggh.bugny.dto.LikeMusicDTO;
 import com.kgggh.bugny.dto.MusicDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 import com.kgggh.bugny.service.music.MusicService;
@@ -33,28 +28,28 @@ public class MusicController {
 	MusicService musicService;
 	
 	@RequestMapping("/musicNewest")
-	public String musicNewest(SearchCriteria cri,Model model,HttpServletRequest httpRequest) throws Exception {
+	public String musicNewest(SearchCriteria cri,Model model) throws Exception {
 		log.info("최신음악 진입");
 		Pagination pagination = new Pagination();
 		pagination.setCri(cri);
 		pagination.setTotalCount(musicService.countNewMusic(cri));
 		List<MusicDTO> musicNewest = musicService.musicNewest(cri);
-		
-		
 		model.addAttribute("musicNewest",musicNewest);
 	    model.addAttribute("pagination", pagination);
-		
+	    
 		return "music/music_newest";
 	}
-	
 	
 	@RequestMapping("/musicTop")
 	public String musicTop100(Criteria cri,Model model) throws Exception {
 		log.info("뮤직 top100 진입");
+		int rank = 100;
+		model.addAttribute("rank",rank);
 		Pagination pagination = new Pagination();
 		pagination.setCri(cri);
-		pagination.setTotalCount(musicService.countTopMusic());
+		pagination.setTotalCount(100);
 		List<MusicDTO> musicTop = musicService.musicTop(cri);
+		System.out.println(musicTop);
 		model.addAttribute("musicTop",musicTop);
 	    model.addAttribute("pagination", pagination);
 		return "music/music_Top";
@@ -70,6 +65,7 @@ public class MusicController {
 	@RequestMapping("/musicDetail")
 	public String boardDetail(MusicDTO music,@RequestParam("music_idx")int music_idx,Model model) throws Exception {
 		log.info("게시글상세 페이지");
+		musicService.musicHit(music_idx);
 		music = musicService.musicDetail(music);
 		model.addAttribute("musicDetail",music);
 		return "music/music_detail";
@@ -85,24 +81,8 @@ public class MusicController {
 	@RequestMapping("/musicWrite") //노래 등록
 	public String musicWrite( MusicDTO music,Model model) throws Exception {
 			musicService.musicCreate(music);
-        return "/musicNewest";
+        return "redirect:/musicNewest";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/getLiked",method = RequestMethod.POST)
-	public Map<String, Object> getPage(LikeMusicDTO liked,Model model) throws Exception{
-		Map<String, Object> result = new HashMap<>();
-		try {
-		musicService.getMusicLike(liked);
-		result.put("status", "OK");
-		} catch (Exception e) {
-		e.printStackTrace();
-		result.put("status", "False");
-		}
-		return result;
-		}
-	
-	
 	
 	
 	

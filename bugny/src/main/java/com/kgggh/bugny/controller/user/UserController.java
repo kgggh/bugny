@@ -94,23 +94,13 @@ public class UserController {
 		return "user/user_myPage";
 	}
 	
-	
-	@RequestMapping("/userUpdatePage")
-	public String userUpdatePage()throws Exception {
-		logger.info("회원정보수정페이지 진입");
-		return "user/userUpdate";
-	}
-	
 	@RequestMapping("/userUpdate")
 	public String userUpdate(UserDTO user, Model model) throws Exception {
 		logger.info("회원정보수정");
 		String encryptPw = AES256Util.encrypt(user.getPassword()); //aes256 암호화
 		user.setPassword(encryptPw);
 		userService.userUpdate(user);
-		model.addAttribute("msg","수정 완료");
-		model.addAttribute("url","/home");
-		
-		return "redirect:/myPage";
+		return "home";
 	}
 	
 	

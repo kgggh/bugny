@@ -4,7 +4,9 @@ package com.kgggh.bugny.controller.board;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,10 +18,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.kgggh.bugny.dto.BoardDTO;
+import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 import com.kgggh.bugny.service.board.BoardService;
@@ -99,9 +103,6 @@ public class BoardController {
 	}
 	
 	
-	
-	
-	
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	public String fileUpload(Model model, MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
 		MultipartFile imgfile = multipartRequest.getFile("Filedata");
@@ -115,6 +116,11 @@ public class BoardController {
 		model.addAttribute("filename", replaceName);
 		return "common/file_upload";
 	}
+	
+	
+	
+	
+	
 	
 	
 }

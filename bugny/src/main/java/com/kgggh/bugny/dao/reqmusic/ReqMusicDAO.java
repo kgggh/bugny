@@ -12,7 +12,6 @@ public interface ReqMusicDAO  {
 	public int ReqMusiCreate(ReqMusicDTO reqMusic) throws Exception;
 	public int ReqMusiUpdate(ReqMusicDTO reqMusic) throws Exception;
 	public int ReqMusiDelete(int req_idx) throws Exception;
-	public List<ReqMusicDTO> testList(int start, int end) throws Exception;
  
 	
 }

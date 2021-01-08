@@ -69,6 +69,10 @@ $(function(){
 						minlength : 8,
 						passwordChk : true,
 						maxlength : 16
+					},
+					email:{
+						required : true, //필수입력여부
+						email : true 	//이메일형식
 					}
 				},
 				//메시지
@@ -78,7 +82,10 @@ $(function(){
 						minlength : ("비밀번호는 8자 이상 입력해 주세요"),
 						passwordChk : "비밀번호는 영문자, 숫자, 특수문자 조합을 입력해야 합니다.",
 						maxlength : ("비밀번호는 16자 이하 입력해 주세요")
-						
+					},
+					email: {
+						required : "이메일은 필수 입력입니다.",
+						email : "이메일 형식을 지켜주세요.EX)aa@naver.com" 
 					}
 				},
 

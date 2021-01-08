@@ -14,17 +14,18 @@
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<script type="text/javascript">
+	
+
+		$(document).ready(function(){
+			showReplyList();
+		});
+
 		$(document).on('click', '#btnUpdate', function(e){
 			location.href="boardUpdateP?board_idx=${boardDetail.board_idx}";
 		});
 		$(document).on('click', '#btnDelete', function(e){
 			location.href="boardDelete?board_idx=${boardDetail.board_idx}";
 		});
-
-		$(document).ready(function(){
-			showReplyList();
-		});
-
 
 		function showReplyList(){
 			var url = "${pageContext.request.contextPath}/restBoard/replyList";
@@ -262,14 +263,14 @@
 			</c:if>
 			<!-- Reply Form {e} -->
 			
-			
-			
 			<!-- Reply List {s}-->
 			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
 				<h6 class="border-bottom pb-2 mb-0">댓글들</h6>
 				<div id="replyList"></div>
 			</div> 
 			<!-- Reply List {e}-->
+			<div class="pagination" style="justify-content: center;" id="paging">
+			</div>
 		</div>
 	</article>
 </body>

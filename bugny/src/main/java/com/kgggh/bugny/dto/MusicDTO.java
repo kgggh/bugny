@@ -10,7 +10,9 @@ public class MusicDTO {
     private int liked;
     private Date releaseDate;
     private String playURL;
-    private String likeCheck;
+    private int hit;
+    
+    
     
 	public int getMusic_idx() {
 		
@@ -57,18 +59,22 @@ public class MusicDTO {
 	public void setPlayURL(String playURL) {
 		this.playURL = playURL;
 	}
-	public String getLikeCheck() {
-		return likeCheck;
+	public int getHit() {
+		return hit;
 	}
-	public void setLikeCheck(String likeCheck) {
-		this.likeCheck = likeCheck;
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	@Override
 	public String toString() {
-		return "MusicDTO [music_idx=" + music_idx + ", album=" + album + ", title=" + title + ", singer=" + singer
-				+ ", liked=" + liked + ", releaseDate=" + releaseDate + ", playURL=" + playURL + ", likeCheck="
-				+ likeCheck + "]";
+		return "MusicDTO [music_idx=" + music_idx + ", album=" + album + ", title=" + title
+				+ ", singer=" + singer + ", liked=" + liked + ", releaseDate=" + releaseDate + ", playURL=" + playURL
+				+ ", hit=" + hit + "]";
 	}
+	
+	
+	
+	
 	
 	
 	

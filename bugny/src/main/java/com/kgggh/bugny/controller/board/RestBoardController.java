@@ -24,6 +24,7 @@ public class RestBoardController {
 
 	@RequestMapping(value = "/replyList", method = RequestMethod.POST)
 	public List<ReplyDTO> getReplyList(@RequestParam("board_idx") int board_idx) throws Exception {
+		
 		return boardService.replyList(board_idx);
 		
 	}
@@ -69,6 +70,8 @@ public class RestBoardController {
 		}
 		return result;
 		}
+	
+	
 		
 
 }

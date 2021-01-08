@@ -16,26 +16,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<script type="text/javascript">
 
-	 $(document).ready(function(){
-		 getLiked();
-		});
-	
-	function getLiked(){
-		var url = "${pageContext.request.contextPath}/restBoard/replyList";
-		var data = {"music_idx" : "${musicDetail.music_idx}", "id" : "${user.id}"};
-		$.ajax({
-	           type: 'POST',
-	           url: "getLiked",
-	           data: data,
-	           dataType: 'json',
-	           success: function(data) {
-	        	   console.log("성공"+data);
-		      }	
-		, error: function(error){
-			console.log("에러 : " + error);
-		}
-		});
-	}
 			
 			
 	</script>
@@ -46,8 +26,12 @@
 		#subTitle{
 			padding-bottom: 50px;
 		}
-		#heart{
-			cursor:pointer;
+		#table td, #table th {
+			text-align: center;
+			vertical-align: baseline;
+		}
+		iframe{
+			width: 100%;
 		}
 	</style>
 </head>
@@ -56,44 +40,38 @@
 	<article>
 		<div class="container" style="width: 900px;" role="main">
 		    <h3 class="text-center text-muted "  id="subTitle">
-			게시글 상세
+			앨범 상세
 			</h3>
  			<div class="row">
 			    <div class="table table-responsive">
-			        <table class="table" >
+			        <table class="table" id="table">
 			        <colgroup>
 					    <col class="col-xs-1">
 					 	<col class="col-xs-7">
 					</colgroup>
 				        <tr>
-				            <th class="active" colspan="">앨범커버</th>
-				            <td colspan="">${musicDetail.album }</td>
-				        	<th class="active" >제목</th>
-				            <td colspan="" style=""><c:out value="${musicDetail.title }"/></td>
-			               	<th class="active" colspan="">가수</th>
-				            <td colspan=""><c:out value="${musicDetail.singer }"/></td>
-				            <th class="active" colspan="" >발매일</th>
-				            <td colspan=""><c:out value="${musicDetail.releaseDate}"/></td>
+				            <th> 앨범커버</th>
+				            <td>${musicDetail.album }</td>
+				        	<th>제목</th>
+				            <td><c:out value="${musicDetail.title }"/></td>
+			               	<th> 가수</th>
+				            <td><c:out value="${musicDetail.singer }"/></td>
+				            <th>발매일</th>
+				            <td><c:out value="${musicDetail.releaseDate}"/></td>
+				            <th>조회수</th>
+				            <td><c:out value="${musicDetail.hit}"/></td>
 				        </tr>
 	         		</table>
+	         		<div>
+	         		${musicDetail.playURL }
+	         		</div>
   				</div>
 			</div>
 			<div class="text-center">
-			<c:choose>
-				  <c:when test="${empty user}">
-				  	<button class="btn btn-md btn-secondary" id="liked">추천</button> <p id="liked">${musicDetail.likeCheck }</p>
-				  </c:when>
-				  <c:otherwise>
-			   		<button class="btn btn-md btn-secondary" id="liked">추천</button><p id="liked"> ${musicDetail.likeCheck}</p>
-				  </c:otherwise>
-			</c:choose>
-			</div>
-			<div class="text-center">
-				<c:if test="${user.id eq admin }">
+				<c:if test="${user.id eq 'admin' }">
 					<button type="button" class="btn btn-md btn-secondary" id="btnUpdate">수정</button>
 					<button type="button" class="btn btn-md btn-secondary" id="btnDelete">삭제</button>
 				</c:if>
-				<button type="button" class="btn btn-md btn-secondary" id="btnList">목록</button>
 			</div>
 		</div>
 	</article>

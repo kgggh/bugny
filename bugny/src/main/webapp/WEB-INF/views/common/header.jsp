@@ -9,10 +9,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-	 integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
-	 crossorigin="anonymous">
-	<!-- common CSS -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<c:url value='/resources/css/header.css'/>" >
 	
 </head>
@@ -23,7 +22,7 @@
 		 <div class="collapse navbar-collapse" id="navDiv">
 			<ul class="navbar-nav  mr-auto">
 				<li class="nav-item">
-				  <a class="nav-link" href="musicTop">인기음악</a>
+				  <a class="nav-link" href="musicTop">음악 Top100</a>
 				</li>
 				<li class="nav-item">
 				  <a class="nav-link" href="musicNewest">최신음악</a>
@@ -32,7 +31,7 @@
 				  <a class="nav-link" href="reqMusicList">음악요청</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="boardList">자유게시판(구현)</a>
+				  <a class="nav-link" href="boardList">자유게시판</a>
 				</li>
 				<li class="nav-item">
 				  <a class="nav-link" href="liveChat" >라이브채팅</a>

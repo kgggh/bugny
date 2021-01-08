@@ -10,7 +10,10 @@
 		WHERE
 			BOARD_IDX = #{board_idx}
 		ORDER BY REGDATE DESC
+		
 	</select>
+	
+
 	
 	<insert id="replyCreate" parameterType="reply" useGeneratedKeys="true" keyProperty="reply_idx">
 		INSERT INTO REPLY(BOARD_IDX,CONTENTS,ID,REGDATE)
@@ -21,6 +24,7 @@
 			, now()
 		)
 	</insert>
+
 
 	<update id="replyUpdate" parameterType="reply">
 		UPDATE REPLY SET

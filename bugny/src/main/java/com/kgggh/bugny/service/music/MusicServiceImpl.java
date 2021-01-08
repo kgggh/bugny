@@ -48,25 +48,14 @@ public class MusicServiceImpl implements MusicService {
 		return musicDAO.countTopMusic();
 	}
 	
-	
-	@Override
-    public void insertMusicLike(LikeMusicDTO liked) throws Exception {
-		musicDAO.insertMusicLike(liked);
-    }
-
-    @Override
-    public void deleteMusicLike(LikeMusicDTO liked) throws Exception {
-    	musicDAO.deleteMusicLike(liked);
-    }
-    
-    @Override
-    public int getMusicLike(LikeMusicDTO liked) throws Exception {
-            return musicDAO.getMusicLike(liked);
-    }
-
 	@Override
 	public MusicDTO musicDetail(MusicDTO music) throws Exception {
 		return musicDAO.boardDetail(music);
+	}
+	@Override
+	public void musicHit(int music_idx)throws Exception {
+		musicDAO.musicHit(music_idx);
+		
 	}
 
 	

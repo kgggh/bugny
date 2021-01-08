@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgggh.bugny.dto.Criteria;
-import com.kgggh.bugny.dto.LikeMusicDTO;
 import com.kgggh.bugny.dto.MusicDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 
@@ -54,29 +53,11 @@ public class MusicDAOImpl implements MusicDAO {
 	public MusicDTO boardDetail(MusicDTO music) throws Exception {
 		return sql.selectOne("music.musicDetail",music);
 	}
-	
+
 	@Override
-    public int getMusicLike(LikeMusicDTO liked) throws Exception {
-        return sql.selectOne("likeMusic.likeList",liked);
-    }
-
-    @Override
-    public void insertMusicLike(LikeMusicDTO liked) throws Exception {
-    	sql.insert("likeMusic.likeMusic",liked);
-    }
-
-    @Override
-    public void deleteMusicLike(LikeMusicDTO liked) throws Exception {
-    	sql.delete("likeMusic.unLikeMusic",liked);
-    }
-
-    @Override
-    public void updateMusicLike(int music_idx) throws Exception {
-    	sql.update("likmeMusic.updateLike",music_idx);
-    }
-
-	
-	
-	
+	public void musicHit(int music_idx) throws Exception {
+		sql.update("music.musicHit",music_idx);
+		
+	}
 
 }

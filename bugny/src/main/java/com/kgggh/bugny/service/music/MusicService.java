@@ -2,9 +2,7 @@ package com.kgggh.bugny.service.music;
 
 import java.util.List;
 
-import com.kgggh.bugny.dto.BoardDTO;
 import com.kgggh.bugny.dto.Criteria;
-import com.kgggh.bugny.dto.LikeMusicDTO;
 import com.kgggh.bugny.dto.MusicDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
 
@@ -15,8 +13,7 @@ public interface MusicService {
 	public void musicDelete(int music_idx) throws Exception;
 	public List<MusicDTO> musicTop(Criteria cri)throws Exception;
 	public int countTopMusic()throws Exception;
-	public void insertMusicLike(LikeMusicDTO liked) throws Exception;
-	public void deleteMusicLike(LikeMusicDTO liked) throws Exception;
-	public int getMusicLike(LikeMusicDTO liked) throws Exception;
 	public MusicDTO musicDetail(MusicDTO music)throws Exception;
+	public void musicHit(int music_idx)throws Exception;
+	
 }

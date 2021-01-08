@@ -1,14 +1,18 @@
 package com.kgggh.bugny.dao.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgggh.bugny.dto.BoardDTO;
+import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.ReplyDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
+import com.kgggh.bugny.util.Pagination;
 
 
 @Repository("boardDAO")
@@ -74,6 +78,9 @@ public class BoardDAOImpl implements BoardDAO {
 		return sql.delete("reply.replyDelete",reply_idx);
 	}
 
+	
+	
+	
 
 
 	
