@@ -3,7 +3,6 @@
 	margin: 0px;
 	padding: 0px;
 	text-decoration: none;
-	color: black;
 	list-style: none;
 }
 
@@ -29,3 +28,7 @@
 .container{
 	width: 100%;
 }
+
+#form2 span.error { 
+	color:tomato; 
+	 }

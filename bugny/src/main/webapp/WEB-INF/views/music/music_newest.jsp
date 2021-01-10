@@ -7,10 +7,7 @@
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>음악듣기</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="<c:url value="/resources/js/music.js" />"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
@@ -26,8 +23,8 @@
 		
 	</style>
 </head>
-<body>
 <%@include file="../common/header.jsp" %>
+<body>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -70,7 +67,7 @@
 								<td>${music.releaseDate }</td>
 								<td><a href="musicDetail?music_idx=<c:out value="${music.music_idx }"/>" >${music.title }</a></td>
 								<td>${music.singer }</td>
-								<td><i class="far fa-heart " id="heart" > </i> ${music.hit }</td>
+								<td><i class="fas fa-eye"></i> ${music.hit }</td>
 							</tr>
 						</c:forEach>
 					</c:if>

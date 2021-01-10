@@ -7,11 +7,6 @@
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>라이브채팅</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
-	<link rel="stylesheet" href="<c:url value='/resources/css/music.css'/>" >
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdn.pubnub.com/pubnub-3.4.4.js"></script>
 	<script type="text/javascript">
@@ -31,15 +26,13 @@
 	    pubnub.history({
 	    	channel: 'chat',
 	    	reverse: false,
-	    	count: 100
+	    	count: 300
 	    }, function(status, response){
 	    	$.each(status[0], function(i, item){
 	    		displayPub(item);
 	    	});
 	    	
 	    });
-
-
 
 		
 		function displayPub(message){

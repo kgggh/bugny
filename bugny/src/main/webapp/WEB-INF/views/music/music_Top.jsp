@@ -1,33 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<title>음악듣기</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"href="resources/css/music.css">
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
-	<script src="<c:url value="/resources/js/music.js" />"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+	<script src="<c:url value="/resources/js/music.js" />"></script>
 	<script type="text/javascript">
 	</script>
     <style type="text/css">
-		body{
-			padding-top: 150px;		
+   	 	body{
+			padding-top: 150px;
 		}
-		#table td {
-			vertical-align: middle;
-			text-align: center;
+		#subTitle{
+			padding-bottom: 50px;
 		}
 	</style>
 </head>
-<body>
 <%@include file="../common/header.jsp" %>
+<body>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -37,7 +34,6 @@
 			<table class="table table-hover text-center" id="table">
 				<thead>
 						<tr> 
-							<th style="width: 5%">순위</th>
 							<th style="width: 10%">앨범</th>
 							<th style="width: 10%">발매일</th>
 							<th style="width: 40%">제목</th>
@@ -49,12 +45,11 @@
 				<c:if test="${not empty musicTop }">
 					<c:forEach var="music" items="${musicTop }">
 						<tr>
-							<td>${rank }</td>
 							<td>${music.album }</td>	
 							<td>${music.releaseDate }</td>
 							<td><a href="musicDetail?music_idx=<c:out value="${music.music_idx }"/>" >${music.title }</a></td>
 							<td>${music.singer }</td>
-							<td><i class="far fa-heart " id="heart" > </i> ${music.hit }</td>
+							<td><i class="fas fa-eye"></i> ${music.hit }</td>
 						</tr>
 					</c:forEach>
 				</c:if>

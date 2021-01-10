@@ -1,9 +1,9 @@
 	$(document).ready(function(){
 	  	  $("#userUpdate").on("click", function(){
-	  	    location.href = 'userUpdate';
+	  	  	alert('정보수정완료!!');
+	  	    location.href = 'user/userUpdate';
 	  	  });  
 	  	});
-	  	
 	  	
 	  	
 // 아이디 유효성 검사(1 = 중복 / 0 != 중복)
@@ -12,7 +12,7 @@
 			var idJ = /^[a-z0-9]{6,12}$/;
 			var id = $('#id').val();
 			$.ajax({
-				url : 'user/idCheck?id='+ id,
+				url : 'idCheck?id='+ id,
 				type : 'get',
 				success : function(data) {
 					console.log("1 = 중복o / 0 = 중복x : "+ data);							

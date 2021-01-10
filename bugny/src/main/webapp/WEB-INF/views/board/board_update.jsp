@@ -5,10 +5,9 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>게시글 수정</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
-	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="<c:url value="/resources/js/board.js" />"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
 	<style type="text/css">
 		body{

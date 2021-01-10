@@ -6,7 +6,6 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	
 	<title>마이페이지</title>
 	<link rel="stylesheet" type="text/css"href="resources/css/reset.css">
 	<link rel="stylesheet" type="text/css"href="resources/css/register.css">
@@ -18,18 +17,17 @@
 		body{
 			padding-top: 150px;
 		}
+		
 	</style>
 </head>
 <%@include file="../common/header.jsp" %>
 <body>
 			
-<div class="container">
+<div class="container"  style="width: 500px">
 	<div class="row">
 		<div class="col-md-12">
-			<p>${user.id }님 환영합니다.</p>
-			<p>최근 접속일 : <fmt:formatDate value="${user.logTime }" type="Date" pattern="yyyy-MM dd:hh:mm"/> </p>
 			<h3 class="text-center text-muted">
-				My Page(회원정보수정)
+				정보수정
 			</h3>
 			<form role="form1" action="userUpdate" class="form1" method="post">
 				<div class="form-group">
@@ -42,7 +40,7 @@
 				</div>
 				<div class="form-group">
 					<label for="name">이름</label>
-					<input type="text" name="name" id="name" value="${user.name }" readonly="readonly" placeholder="이름을 입력해 주세요." class="form-control" />
+					<input type="text" name="name" id="name" value="${user.name }" readonly="readonly" class="form-control" />
 				</div>
 				<div class="form-group">
 					<label for="birth">생년월일</label>
@@ -50,7 +48,7 @@
 				</div>
 				<div class="form-group">
 					<label for="email">이메일</label>
-					<input type="text" name="email"id="email" value="${user.email }" placeholder="이메일을 입력해 주세요." class="form-control" />
+					<input type="text" name="email"id="email" value="${user.email }" readonly="readonly" class="form-control" />
 				</div>
 				<div class="form-group">
 					<label for="address">주소</label>

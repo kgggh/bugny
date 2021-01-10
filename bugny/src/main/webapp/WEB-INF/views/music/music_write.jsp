@@ -7,15 +7,36 @@
 	<title>음악등록</title>
 	<link rel="stylesheet" type="text/css"href="resources/css/reset.css">
 	<link rel="stylesheet" type="text/css"href="resources/css/music.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
-	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="<c:url value="/resources/js/music.js" />"></script>
 	<script type="text/javascript" src="resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
 	
-	<script type="text/javascript" src="resources/js/jquery.validate.min.js"></script>
 	<script type="text/javascript">
-	
+	$(function(){
+		$("#form2").validate({
+			//규칙
+			rules:{
+				releaseDate:{
+					required : true, //필수입력여부
+					date : true 	//date
+				}
+			},
+			//메시지
+			messages:{
+				releaseDate:{
+					required :"생년월일을 입력해 주세요",
+					date : " Ex) YYYY-MM-DD" 
+				}
+			},
+			//메시지 태그
+			errorElement : 'span', 	//태그
+			errorClass: 'error',	//클레스 이름
+			validClass:'vaild'
+				
+		});
+		return false;
+});
 	</script>
 	<style type="text/css">
 		body{
@@ -26,13 +47,13 @@
 		}
 	</style>
 </head>
-<body>
 <%@include file="../common/header.jsp" %>
+<body>
 <div class="container" role="main">
 	<h3 class="text-center text-muted " id="subTitle">
 		음악등록
 	</h3>
-	<form name="form2" id="form2" role="form2" >
+	<form name="form2"  id="form2" role="form2" >
 		<div class="mb-3">
 			<label for="title">제목</label>
 			<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
@@ -54,7 +75,7 @@
 		 	<textarea id="txtContent" name="album" rows="30" style="width:100%;"></textarea>
 		</div>
 		<div class="selectBtn">
-			<button type="button"  class="btn btn-sm btn-secondary" id="btnWrite" onclick="onWrite()">작성완료</button>
+			<button type="submit"  class="btn btn-sm btn-secondary" id="btnWrite" onclick="onWrite()">작성완료</button>
 			<button type="button" class="btn btn-sm btn-secondary" id="btnList">목록</button>
 		</div>
 	</form>
@@ -62,28 +83,7 @@
 </body>
 
 <script type="text/javascript"  charset="utf-8" >
-	$(function(){
-		$("#form2").validate({
-			//규칙
-			rules:{
-				releaseDate:{
-					required : true, //필수입력여부
-					date : true 	//date
-				}
-			},
-			//메시지
-			messages:{
-				releaseDate:{
-					required :"생년월일을 입력해 주세요",
-					date : " Ex) YYYY-MM-DD" 
-				}
-			},
-			//메시지 태그
-			errorElement : 'span', 	//태그
-			errorClass: 'error',	//클레스 이름
-			validClass:'vaild' 
-		});
-});
+
 	
 
 var oEditors = [];
@@ -102,6 +102,7 @@ fOnAppLoad: function () {
 var onWrite = function(){
 oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 var form2 = document.getElementById("form2"); 
+var date_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
 if($("#title").val() == '') {
 	alert("제목을 작성해주세요."); 
 	$('#title').focus();
@@ -118,6 +119,12 @@ if($("#playURL").val() == '') {
 	return;
 }
 
+if(!date_pattern .test(form2.releaseDate.value)){
+	alert("발매일을 확인해주세요."); 
+	$('#releaseDate').focus();
+return false;
+}
+
 form2.action ="musicWrite";              
 form2.submit();  
 };
@@ -130,6 +137,7 @@ oEditors.getById["txtContent"].exec("PASTE_HTML", [sHTML]);
 
 </script>
 
+<script type="text/javascript" src="resources/js/jquery.validate.min.js"></script>
 </html>
 
 

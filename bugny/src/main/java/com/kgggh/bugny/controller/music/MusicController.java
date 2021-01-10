@@ -41,15 +41,12 @@ public class MusicController {
 	}
 	
 	@RequestMapping("/musicTop")
-	public String musicTop100(Criteria cri,Model model) throws Exception {
-		log.info("뮤직 top100 진입");
-		int rank = 100;
-		model.addAttribute("rank",rank);
+	public String musicTop(Criteria cri,Model model) throws Exception {
+		log.info("인기음악 진입");
 		Pagination pagination = new Pagination();
 		pagination.setCri(cri);
-		pagination.setTotalCount(100);
+		pagination.setTotalCount(musicService.countTopMusic());
 		List<MusicDTO> musicTop = musicService.musicTop(cri);
-		System.out.println(musicTop);
 		model.addAttribute("musicTop",musicTop);
 	    model.addAttribute("pagination", pagination);
 		return "music/music_Top";

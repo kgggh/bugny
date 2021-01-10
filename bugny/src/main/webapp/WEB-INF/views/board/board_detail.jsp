@@ -6,12 +6,9 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>게시판</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/board.js" />"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<script type="text/javascript">
 	

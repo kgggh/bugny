@@ -15,8 +15,6 @@
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<script type="text/javascript">
-
-			
 			
 	</script>
 	<style type="text/css">
@@ -66,12 +64,6 @@
 	         		${musicDetail.playURL }
 	         		</div>
   				</div>
-			</div>
-			<div class="text-center">
-				<c:if test="${user.id eq 'admin' }">
-					<button type="button" class="btn btn-md btn-secondary" id="btnUpdate">수정</button>
-					<button type="button" class="btn btn-md btn-secondary" id="btnDelete">삭제</button>
-				</c:if>
 			</div>
 		</div>
 	</article>

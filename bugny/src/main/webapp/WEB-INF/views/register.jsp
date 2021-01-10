@@ -12,15 +12,15 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="resources/js/validate.js"></script> 
-	<script type="text/javascript" src="resources/js/user.js"></script> 
-	<script type="text/javascript" src="resources/js/jquery.validate.min.js"></script>
+	
+
 	<style type="text/css">
 		body{
 			padding-top: 150px;		
 		}
 	</style>
 </head>
+<%@include file="./common/header.jsp" %>
 <body>
 <div class="container " style="width: 500px">
 	<div class="row">
@@ -63,10 +63,15 @@
 						회원가입
 					</button>
 				</div>
+				<input type="hidden"
+					name="${_csrf.parameterName}"
+					value="${_csrf.token}"/>
 			</form>
 		</div>
 	</div>
 </div>
 </body>
-	
+	<script type="text/javascript" src="resources/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="resources/js/validate.js"></script> 
+	<script type="text/javascript" src="resources/js/user.js"></script> 
 </html>
