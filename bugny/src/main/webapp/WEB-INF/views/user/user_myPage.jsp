@@ -9,21 +9,21 @@
 	<title>마이페이지</title>
 	<link rel="stylesheet" type="text/css"href="resources/css/reset.css">
 	<link rel="stylesheet" type="text/css"href="resources/css/register.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-	
 	<link rel="stylesheet" type="text/css"href="resources/css/login.css">
 	<style type="text/css">
-		body{
-			padding-top: 150px;
+	#container{
+			 width:500px;
+			 padding-top: 150px;
 		}
-		
+	body {
+		padding-top: 0px;
+	}
+	
 	</style>
 </head>
-<%@include file="../common/header.jsp" %>
 <body>
-			
-<div class="container"  style="width: 500px">
+<%@include file="../common/header.jsp" %>
+<div class="container" id="container" >
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center text-muted">

@@ -3,6 +3,7 @@ package com.kgggh.bugny.controller.music;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.MusicDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
+import com.kgggh.bugny.dto.UserDTO;
 import com.kgggh.bugny.service.music.MusicService;
 import com.kgggh.bugny.util.Pagination;
 
@@ -53,9 +55,16 @@ public class MusicController {
 	}
 		
 	@RequestMapping("/musicWriteP")
-	public String musicWritePage() {
-		log.info("노래 등록 페이지");
-		return "music/music_write";
+	public String musicWritePage(Model model,HttpSession session) {
+		String id = (String) session.getAttribute("loginId");
+		System.out.println(id);
+		if(id.equals("admin")) {
+			return "music/music_write";
+		}else {
+			model.addAttribute("msg","잘못된 경로입니다.다시 시도해주세요.");
+			model.addAttribute("url","/home");
+		return "redirect";
+		}
 	}
 	
 	//글상세페이지

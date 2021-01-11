@@ -39,17 +39,17 @@
 });
 	</script>
 	<style type="text/css">
-		body{
-			padding-top: 150px;	
-		}
 		#subTitle{
 			padding-bottom: 50px;
+		}
+		#container{
+			 padding-top: 150px;
 		}
 	</style>
 </head>
 <%@include file="../common/header.jsp" %>
 <body>
-<div class="container" role="main">
+<div class="container" id="container">
 	<h3 class="text-center text-muted " id="subTitle">
 		음악등록
 	</h3>

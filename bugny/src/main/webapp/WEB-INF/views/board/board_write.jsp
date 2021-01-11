@@ -14,9 +14,6 @@
 	
 	</script>
 	<style type="text/css">
-		body{
-			padding-top: 150px;	
-		}
 		#subTitle{
 			padding-bottom: 50px;
 		}
@@ -24,7 +21,7 @@
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
-<div class="container" role="main">
+<div class="container" role="main" id="container">
 	<h3 class="text-center text-muted " id="subTitle">
 		게시글 쓰기
 	</h3>
@@ -52,7 +49,6 @@
 		</div>
 		<div class="selectBtn">
 			<button type="button"  class="btn btn-sm btn-secondary" id="btnWrite" onclick="onWrite()">작성완료</button>
-			<button type="button" class="btn btn-sm btn-secondary" id="btnList">목록</button>
 		</div>
 	</form>
 </div>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,18 +12,16 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-	
-
 	<style type="text/css">
-		body{
-			padding-top: 150px;		
+	#container{
+			 width:500px;
+			 padding-top: 150px;
 		}
 	</style>
 </head>
-<%@include file="./common/header.jsp" %>
 <body>
-<div class="container " style="width: 500px">
+<%@include file="./common/header.jsp" %>
+<div class="container" id="container" >
 	<div class="row">
 		<div class="col-md-12 ">
 			<h3 class="text-center text-muted">
@@ -63,9 +62,6 @@
 						회원가입
 					</button>
 				</div>
-				<input type="hidden"
-					name="${_csrf.parameterName}"
-					value="${_csrf.token}"/>
 			</form>
 		</div>
 	</div>

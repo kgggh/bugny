@@ -1,6 +1,5 @@
 package com.kgggh.bugny.dto;
 
-import org.springframework.web.util.UriComponentsBuilder;
 
 public class Criteria {
 	    

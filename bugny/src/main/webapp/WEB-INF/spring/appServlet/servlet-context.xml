@@ -31,5 +31,15 @@
 	</beans:bean>
 	
 	
+	<!-- Configuring interceptors based on URI -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/boardWriteP" />
+			<mapping path="/boardUpdateP" />
+			<mapping path="/myPage" />
+			<beans:bean class="com.kgggh.bugny.interceptor.AuthLoginInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+	
 	
 </beans:beans>

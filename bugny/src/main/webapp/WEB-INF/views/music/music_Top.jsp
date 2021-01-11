@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>음악듣기</title>
+	<title>인기음악</title>
 	<link rel="stylesheet" type="text/css"href="resources/css/music.css">
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
@@ -15,20 +15,20 @@
 	<script type="text/javascript">
 	</script>
     <style type="text/css">
-   	 	body{
-			padding-top: 150px;
-		}
 		#subTitle{
 			padding-bottom: 50px;
+		}
+		#container{
+			 padding-top: 150px;
 		}
 	</style>
 </head>
 <%@include file="../common/header.jsp" %>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" id="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="text-center text-muted">
+			<h3 class="text-center text-muted" id="subTitle">
 				이 노래 모르면 간첩!
 			</h3>
 			<table class="table table-hover text-center" id="table">
@@ -60,13 +60,6 @@
 				</c:if>
 				</tbody>
 			</table>
-			<div class="justify-content-end" align="right" id="btn">
-				<c:if test="${user.id eq 'admin'}">
-				<button type="button" class="btn btn-md btn-secondary pull-right" id="musicWriteP">
-					음악등록
-				</button>
-				</c:if>
-			</div>
 			<div>
 			  	<ul class="pagination" style="justify-content: center;">
 					<c:if test="${pagination.prev }">

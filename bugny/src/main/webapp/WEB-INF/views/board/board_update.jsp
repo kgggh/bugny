@@ -10,8 +10,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
 	<style type="text/css">
-		body{
-			padding-top: 150px;	
+		#container{
+			 padding-top: 150px;
 		}
 		#subTitle{
 			padding-bottom: 50px;
@@ -20,7 +20,7 @@
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
-<div class="container" role="main">
+<div class="container" role="main" id="container">
 	<h3 class="text-center text-muted"  id="subTitle">
 		게시글 수정
 	</h3>
@@ -48,7 +48,6 @@
 		<div class="selectBtn">
 			<input type="hidden" name="board_idx" value="${boardUpdate.board_idx }">
 			<button type="button"  class="btn btn-sm btn-secondary" id="btnWrite" onclick="onModify()">수정완료</button>
-			<button type="button" class="btn btn-sm btn-secondary" id="btnList">목록</button>
 		</div>
 	</form>
 </div>

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시판</title>
+	<title>음악요청</title>
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
@@ -154,8 +154,8 @@
     </script>
     
     <style type="text/css">
-		body{
-			padding-top: 150px;
+		#container{
+			 padding-top: 150px;
 		}
 		#subTitle{
 			padding-bottom: 50px;
@@ -165,11 +165,11 @@
 <%@include file="../common/header.jsp" %>
 <body>
 
-<div class="container-fluid">
+<div class="container-fluid" id="container">
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center text-muted " id="subTitle">
-				음악요청
+				관리자님 노래 요청이요!
 			</h3>
 			<!-- Reply Form {s} -->
 			<c:if test="${not empty user }">

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시판</title>
+	<title>게시글리스트</title>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="<c:url value="/resources/js/board.js" />"></script>
@@ -14,18 +14,18 @@
     </script>
     
     <style type="text/css">
-		body{
-			padding-top: 150px;
-		}
 		#subTitle{
 			padding-bottom: 50px;
+		}
+		#container{
+			 padding-top: 150px;
 		}
 	</style>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
 
-<div class="container-fluid">
+<div class="container-fluid" id="container">
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center text-muted " id="subTitle">
@@ -72,7 +72,7 @@
 								<td><a href="boardDetail?board_idx=<c:out value="${board.board_idx }"/>" >${board.title }</a></td>
 								<td>${board.id }</td>
 								<td>${board.regdate }</td>
-								<td>${board.hit }</td>
+								<td><i class="fas fa-eye"></i> ${board.hit }</td>
 							</tr>
 							</c:when>
 							<c:otherwise>

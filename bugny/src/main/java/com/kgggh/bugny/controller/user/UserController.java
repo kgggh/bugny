@@ -40,7 +40,7 @@ public class UserController {
 		user.setPassword(encryptPw);
 		userService.register(user);
 		model.addAttribute("msg","회원가입 성공");
-		model.addAttribute("url","/loginPage");
+		model.addAttribute("url","/login");
 	
 		return "redirect";
 	}
@@ -68,21 +68,16 @@ public class UserController {
 		UserDTO login = userService.login(user);
 		if (login == null) {
 			model.addAttribute("msg","아이디 비밀번호를 확인해주세요.");
-			model.addAttribute("url","/loginPage");
+			model.addAttribute("url","/login");
 		}else {
 			
 		userService.logTime(login.getId());
+		session.setAttribute("loginId",user.getId());
 		session.setAttribute("user", login);
 		model.addAttribute("msg","로그인 완료");
 		model.addAttribute("url","/home");
 		}
 		return "redirect";
-	}
-	
-	@RequestMapping("/userSearch")
-	public String userSearch(HttpSession session)throws Exception {
-		logger.info("id/pw찾기");
-		return "user/user_search";
 	}
 	
 	@RequestMapping("/logout")
@@ -92,12 +87,12 @@ public class UserController {
 		return "redirect:/home";
 	}
 	
-	@RequestMapping("user/myPage")
+	@RequestMapping("/myPage")
 	public String myPage(UserDTO user)throws Exception {
 		return "user/user_myPage";
 	}
 	
-	@RequestMapping("user/userUpdate")
+	@RequestMapping("/userUpdate")
 	public String userUpdate(UserDTO user, Model model) throws Exception {
 		logger.info("회원정보수정");
 		String encryptPw = AES256Util.encrypt(user.getPassword()); //aes256 암호화

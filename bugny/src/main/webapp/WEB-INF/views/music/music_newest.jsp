@@ -6,30 +6,32 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>음악듣기</title>
+	<title>최신음악</title>
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="<c:url value="/resources/js/music.js" />"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	
     <style type="text/css">
-		body{
-			padding-top: 150px;		
+		#container{
+			 padding-top: 150px;
 		}
 		#table td {
 			vertical-align: middle;
 			text-align: center;
 		}
-		
+		#subTitle{
+			padding-bottom: 50px;
+		}
 	</style>
 </head>
 <%@include file="../common/header.jsp" %>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" id="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="text-center text-muted">
-				최신음악
+			<h3 class="text-center text-muted" id="subTitle">
+				뜨끈한 신곡!
 			</h3>
 			<form method="get" role="form">
 				<div class="form-group row justify-content-end" id="search">

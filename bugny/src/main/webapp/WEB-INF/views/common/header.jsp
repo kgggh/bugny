@@ -19,10 +19,7 @@
 		}
 		#dropdown{
 			color: white;
-		}
-		#navbar{
-			height: 100px;
-			
+			border: 0px;
 		}
 		.nav-item > a {
 			font-size: 20px;	
@@ -41,55 +38,54 @@
 	</style>
 </head>
 <body >
-<!-- 상단 메뉴바{s} -->
-	<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" id="navbar">
-		<a class="navbar-brand" href="home">Bugny</a>
-		 <div class="collapse navbar-collapse" id="navDiv">
-			<ul class="navbar-nav  mr-auto">
-				<li class="nav-item">
-				  <a class="nav-link" href="musicTop">음악 Top100</a>
-				</li>
-				<li class="nav-item">
-				  <a class="nav-link" href="musicNewest">최신음악</a>
-				</li>
-				<li class="nav-item">
-				  <a class="nav-link" href="reqMusicList">음악요청</a>
-				</li>
-				<li class="nav-item">
-				  <a class="nav-link" href="boardList">자유게시판</a>
-				</li>
-				<li class="nav-item">
-				  <a class="nav-link" href="liveChat" >라이브채팅</a>
-				</li>
-		    </ul>
-		    <ul class="nav navbar-nav ml-auto navbar-right">
-		    <c:if test="${empty user }">
-				<li class="nav-item">
-					<a class="nav-link" href="login">로그인</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="registerPage">회원가입</a>
-				</li>
-		    </c:if>
-		    <c:if test="${not empty user }">
-				<div class="dropdown"  >
-				<button class="btn dropdown-toggle bg-dark" type="button" data-toggle="dropdown" id="btn">마이페이지
-				<span class="caret"></span></button>
-				<ul class="dropdown-menu  bg-dark " id="dropdown" >
-				  <li><b>${user.id }</b>님 접속중</li>
-				  <li>최근접속일 : <fmt:formatDate  pattern="yyyy-MM-dd HH:mm" value="${user.logTime }"/> </li>
-				  <li><a class="nav-link" href="user/myPage">정보수정</a></li>
-				</ul>
-			</div>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" id="navbar">
+	<a class="navbar-brand" href="home">Bugny</a>
+	<button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navDiv"> 
+		<span class="navbar-toggler-icon"></span> </button>
+	 <div class="collapse navbar-collapse flex-grow-0" id="navDiv">
+		<ul class="navbar-nav me-auto mb-2 mb-md-0">
 			<li class="nav-item">
-					<a class="nav-link" href="logout">로그아웃</a>
-				</li>
-		    </c:if>
-		    </ul>
+			  <a class="nav-link" href="musicTop">인기음악</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="musicNewest">최신음악</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="reqMusicList">음악요청</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="boardList">자유게시판</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="liveChat" >라이브채팅</a>
+			</li>
+	    </ul>
+	    <ul class="nav navbar-nav ml-auto navbar-right">
+	    <c:if test="${empty user }">
+			<li class="nav-item">
+				<a class="nav-link" href="login">로그인</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="registerPage">회원가입</a>
+			</li>
+	    </c:if>
+	    <c:if test="${not empty user }">
+			<div class="dropdown"  >
+			<button class="btn dropdown-toggle bg-dark" type="button" data-toggle="dropdown" id="btn">마이페이지
+			<span class="caret"></span></button>
+			<ul class="dropdown-menu  bg-dark " id="dropdown" >
+			  <li>${user.id } 님 접속중</li>
+			  <li>최근 접속일 : <fmt:formatDate  pattern="yyyy-MM-dd HH:mm" value="${user.logTime }"/> </li>
+			  <li><a class="nav-link" href="myPage">정보수정</a></li>
+			</ul>
 		</div>
-	</nav>
-	<div>
-</div>
+		<li class="nav-item">
+				<a class="nav-link" href="logout">로그아웃</a>
+		</li>
+	    </c:if>
+	    </ul>
+	</div>
+</nav>
 </body>
 
 </html>

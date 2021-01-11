@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시판</title>
+	<title>게시판상세페이지</title>
 	<script src="<c:url value="/resources/js/board.js" />"></script>
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -38,7 +38,7 @@
 							htmls = "달린 댓글이 없습니다.";
 						} else {
 				                    $(result).each(function(){
-				                     htmls += '<div class="media text-muted pt-3" id="reply_idx' + this.reply_idx + '">';
+				                     htmls += '<div class="media  pt-3" id="reply_idx' + this.reply_idx + '">';
 				                     htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
 				                     htmls += '<title>Placeholder</title>';
 				                     htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
@@ -179,28 +179,21 @@
 				}
 			});
 		});
-
-	
-
-
-
 	</script>
 	<style type="text/css">
-		body{
-			padding-top: 150px;
+		#container{
+			 padding-top: 150px;
+			 width: 900px;
 		}
 		#subTitle{
 			padding-bottom: 50px;
-		}
-		#heart{
-			cursor:pointer;
 		}
 	</style>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
 	<article>
-		<div class="container" style="width: 900px;" role="main">
+		<div class="container" id="container">
 		    <h3 class="text-center text-muted "  id="subTitle">
 			게시글 상세
 			</h3>
@@ -222,8 +215,8 @@
 				        <tr>
 				        	<th class="active" >제목</th>
 				            <td colspan="9" style=""><c:out value="${boardDetail.title }"/></td>
-				          	<th class="active" colspan="2" >조회수</th>
-				            <td ><c:out value="${boardDetail.hit }"/></td>
+				          	<th class="active" colspan="2" > 조회수</th>
+				            <td ><i class="fas fa-eye"></i> <c:out value="${boardDetail.hit }"/></td>
 				            <th class="active" colspan="2">추천</th>
 				            <td colspan="2"><i class="far fa-heart " id="heart"> ${boardDetail.liked }</i></td>
 				        </tr>
@@ -238,7 +231,6 @@
 				<button type="button" class="btn btn-md btn-secondary" id="btnUpdate">수정</button>
 				<button type="button" class="btn btn-md btn-secondary" id="btnDelete">삭제</button>
 				</c:if>
-				<button type="button" class="btn btn-md btn-secondary" id="btnList">목록</button>
 			</div>
 			
 			<!-- Reply Form {s} -->

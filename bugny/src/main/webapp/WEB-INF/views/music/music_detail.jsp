@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시판</title>
+	<title>음악상세페이지</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -18,9 +18,6 @@
 			
 	</script>
 	<style type="text/css">
-		body{
-			padding-top: 150px;
-		}
 		#subTitle{
 			padding-bottom: 50px;
 		}
@@ -31,12 +28,16 @@
 		iframe{
 			width: 100%;
 		}
+		#container{
+			 padding-top: 150px;
+			 width: 900px;
+		}
 	</style>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
 	<article>
-		<div class="container" style="width: 900px;" role="main">
+		<div class="container" role="main" id="container">
 		    <h3 class="text-center text-muted "  id="subTitle">
 			앨범 상세
 			</h3>

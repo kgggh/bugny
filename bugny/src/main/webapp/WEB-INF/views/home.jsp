@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@include file="./common/header.jsp" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,21 +12,21 @@
 	</script>
 		
 	<style type="text/css">
-		body{
-			padding-top: 100px;
-		}
 		#main{
-			height: 850px;
+			height: 100vh;
 			width: 100%;
-			background-image: url("resources/img/main-image.jpg");
+			background-img: url("resources/img/main-image.jpg");
+			background-repeat: no-repeat;
+			background-position: center;
 			background-size: cover;
+			background: url("resources/img/main-image.jpg") no-repeat center/cover;
+
 		}
 	</style>
 </head>
-
 <body>
+<%@include file="./common/header.jsp" %>
 <div id="main">
-	
 </div>
 </body>
 </html>

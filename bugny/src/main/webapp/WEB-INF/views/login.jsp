@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +18,18 @@
 	  	});
 	</script>
 	<style type="text/css">
-		body{
-			padding-top: 150px;	
+		#container{
+			 width:500px;
+			 padding-top: 150px;
 		}
 	</style>
 </head>
-<%@include file="./common/header.jsp" %>
 <body>
-<div class="container" style="width:500px;">
+<header>
+<%@include file="./common/header.jsp" %>
+</header>
+<main role="main">
+<div class="container" id="container">
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center text-muted">
@@ -45,9 +50,6 @@
 					</label>
 					<input type="password" name="password" placeholder="비밀번호를 입력해 주세요." class="form-control" id="password" required/>
 				</div>
-				<input type="hidden"
-					name="${_csrf.parameterName}"
-					value="${_csrf.token}"/>
 				<div class="check_font" id="id_password"></div>
 				<div class="selectBtn text-center" style="margin-top: 10px;">
 				<button type="submit" class="btn btn-secondary "  id="login">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 </div>
-
+</main>
 </body>
 </html>
 

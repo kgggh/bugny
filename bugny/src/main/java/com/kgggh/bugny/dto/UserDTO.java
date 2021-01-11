@@ -12,7 +12,6 @@ public class UserDTO {
 	    private String phone; // 핸드폰 
 	    private String reg; //가입일 
 	    private Date logTime; //로그인일자 
-	    private String role; //권한
 	    
 		public UserDTO() {}
 
@@ -107,24 +106,17 @@ public class UserDTO {
 		}
 
 
-		public String getRole() {
-			return role;
-		}
-
-
-		public void setRole(String role) {
-			this.role = role;
-		}
-
-
 		@Override
 		public String toString() {
 			return "UserDTO [id=" + id + ", password=" + password + ", name=" + name + ", birth=" + birth + ", email="
 					+ email + ", address=" + address + ", phone=" + phone + ", reg=" + reg + ", logTime=" + logTime
-					+ ", role=" + role + "]";
+					+ "]";
 		}
-		
-		
+
+
+
+
+
 		
 	    
 	    

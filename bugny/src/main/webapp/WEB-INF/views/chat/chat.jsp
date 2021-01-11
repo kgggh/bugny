@@ -76,19 +76,19 @@
 			background-color: #FAFAFA;
 			
 		}
-		body{
-			padding-top: 150px;	
-		}
 		#subTilte{
 			padding-bottom: 50px;
 		}
 		#sendChat{
 		}
+		#container{
+			 padding-top: 150px;
+		}
 	</style>
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
-<div class="container">
+<div class="container" id="container">
 	<div>
 		<h3 class="text-center text-muted " id="subTilte">라이브채팅방</h3>
 		<div id="chatPub"></div>
