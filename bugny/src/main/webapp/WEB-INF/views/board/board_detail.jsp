@@ -192,7 +192,6 @@
 </head>
 <body>
 <%@include file="../common/header.jsp" %>
-	<article>
 		<div class="container" id="container">
 		    <h3 class="text-center text-muted "  id="subTitle">
 			게시글 상세
@@ -261,7 +260,6 @@
 			<div class="pagination" style="justify-content: center;" id="paging">
 			</div>
 		</div>
-	</article>
 </body>
 
 </html>

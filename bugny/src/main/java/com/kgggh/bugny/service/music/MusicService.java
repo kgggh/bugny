@@ -15,5 +15,5 @@ public interface MusicService {
 	public int countTopMusic()throws Exception;
 	public MusicDTO musicDetail(MusicDTO music)throws Exception;
 	public void musicHit(int music_idx)throws Exception;
-	
+	public void musicUpdate(MusicDTO music)throws Exception;	
 }

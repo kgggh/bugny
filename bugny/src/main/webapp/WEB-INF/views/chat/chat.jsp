@@ -83,6 +83,8 @@
 		}
 		#container{
 			 padding-top: 150px;
+			 padding-bottom: 150px;
+			 
 		}
 	</style>
 </head>
@@ -103,7 +105,6 @@
 		<input type="text" id="messagePub" placeholder="message" required style="width: 89%;"/>
 		<input type="submit" id="sendPub" value="전송" style="width: 10%;"/>
 	</div>
-
 </div>
 	
 </body>

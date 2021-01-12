@@ -129,5 +129,16 @@
 			MUSIC_IDX = #{music_idx}
 	</delete>
 	
+	<update id="musicUpdate">
+		UPDATE 
+			MUSIC
+		SET 
+			TITLE = #{title}
+			SINGER = #{singer}
+			RELEASEDATE = #{releaseDate}
+			ALBUM = #{album}
+		WHERE 
+			MUSIC_IDX = #{music_idx}
+	</update>
 	
 </mapper>

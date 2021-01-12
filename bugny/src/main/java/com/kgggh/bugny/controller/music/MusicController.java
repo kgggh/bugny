@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kgggh.bugny.dto.BoardDTO;
 import com.kgggh.bugny.dto.Criteria;
 import com.kgggh.bugny.dto.MusicDTO;
 import com.kgggh.bugny.dto.SearchCriteria;
@@ -88,6 +89,23 @@ public class MusicController {
 	public String musicWrite( MusicDTO music,Model model) throws Exception {
 			musicService.musicCreate(music);
         return "redirect:/musicNewest";
+	}
+	
+	
+	//글수정페이지
+	@RequestMapping("/musicUpdateP")
+	public String musicUpdatePage(Model model,MusicDTO music ) throws Exception {
+		log.info("게시글수정 페이지");
+		music = musicService.musicDetail(music);
+		model.addAttribute("musicUpdate",music);
+		return "music/music_update";
+		}
+		
+	//글수정
+	@RequestMapping("/musicUpdate")
+	public String musicUpdate(MusicDTO music,Model model) throws Exception {
+		musicService.musicUpdate(music);
+		return "redirect:/musicNewest";
 	}
 	
 	

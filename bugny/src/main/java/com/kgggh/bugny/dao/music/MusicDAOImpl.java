@@ -60,4 +60,10 @@ public class MusicDAOImpl implements MusicDAO {
 		
 	}
 
+	@Override
+	public void musicUpdate(MusicDTO music) throws Exception {
+		sql.update("music.musicUpdate",music);
+		
+	}
+
 }

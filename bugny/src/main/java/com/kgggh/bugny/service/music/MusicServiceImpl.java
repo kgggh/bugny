@@ -58,6 +58,12 @@ public class MusicServiceImpl implements MusicService {
 		
 	}
 
+	@Override
+	public void musicUpdate(MusicDTO music) throws Exception {
+		musicDAO.musicUpdate(music);
+		
+	}
+
 	
 	
 

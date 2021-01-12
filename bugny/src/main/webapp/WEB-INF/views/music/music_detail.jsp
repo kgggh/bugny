@@ -15,7 +15,9 @@
 	<link rel="stylesheet" type="text/css"href="resources/css/board.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<script type="text/javascript">
-			
+	$(document).on('click', '#btnUpdate', function(e){
+		location.href="musicUpdateP?music_idx=${musicDetail.music_idx}";
+	});
 	</script>
 	<style type="text/css">
 		#subTitle{
@@ -65,6 +67,11 @@
 	         		${musicDetail.playURL }
 	         		</div>
   				</div>
+			</div>
+  			<div class="text-center">
+				<c:if test="${user.id eq 'admin' }">
+  					<button type="button" class="btn btn-md btn-secondary" id="btnUpdate">수정</button>
+				</c:if>
 			</div>
 		</div>
 	</article>

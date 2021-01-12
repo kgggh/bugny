@@ -15,7 +15,7 @@ public interface MusicDAO  {
 	public void musicDelete(int music_idx) throws Exception;
 	public MusicDTO boardDetail(MusicDTO music)throws Exception;
 	public void musicHit(int music_idx)throws Exception;
-		
+	public void musicUpdate(MusicDTO music)throws Exception;	
 
 	
 }
