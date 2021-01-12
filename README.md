@@ -11,6 +11,12 @@ WAS- tomcat 8.5<br>
 mybatis 3.28<br>
 mysql 5.7.31<br>
 <br>
+
+- 배포(AWS Ec2)
+
+18.224.45.103:8080/bugny/
+<br>
+
 - 후기
 
 AWS EC2(ubuntu)환경에서 배포진행,aws ec2로 처음 배포해보는거라 어려웠다.<br>
