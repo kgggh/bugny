@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,13 +27,13 @@ public class ReqMusicController {
 	@Autowired
 	ReqMusicService reqMusicService;
 	
-	@RequestMapping(value = "/reqMusicList",method = RequestMethod.GET)
+	@GetMapping(value = "/reqMusicList")
 	public String reqMusicList() throws Exception{
 		return "music/music_request";
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/getReqList", method = RequestMethod.GET)
+	@GetMapping(value = "/getReqList")
     public Map<String, Object> reqMusicList(Criteria cri) throws Exception {
 		Pagination pagination = new Pagination();
 		pagination.setCri(cri);
@@ -46,7 +47,7 @@ public class ReqMusicController {
     }
 	
 	@ResponseBody
-	@RequestMapping(value = "/reqPageList", method = RequestMethod.POST)
+	@PostMapping(value = "/reqPageList")
     public Map<String, Object> reqMusicPage(@RequestParam("page")int page) throws Exception {
 		Criteria cri = new Criteria();
 		cri.setPage(page);

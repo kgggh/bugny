@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,7 +32,7 @@ public class MusicController {
 	@Autowired
 	MusicService musicService;
 	
-	@RequestMapping("/musicNewest")
+	@GetMapping("/musicNewest")
 	public String musicNewest(SearchCriteria cri,Model model) throws Exception {
 		log.info("최신음악 진입");
 		Pagination pagination = new Pagination();
@@ -43,7 +45,7 @@ public class MusicController {
 		return "music/music_newest";
 	}
 	
-	@RequestMapping("/musicTop")
+	@GetMapping("/musicTop")
 	public String musicTop(Criteria cri,Model model) throws Exception {
 		log.info("인기음악 진입");
 		Pagination pagination = new Pagination();
@@ -55,7 +57,7 @@ public class MusicController {
 		return "music/music_Top";
 	}
 		
-	@RequestMapping("/musicWriteP")
+	@GetMapping("/musicWriteP")
 	public String musicWritePage(Model model,HttpSession session) {
 		String id = (String) session.getAttribute("loginId");
 		System.out.println(id);
@@ -69,7 +71,7 @@ public class MusicController {
 	}
 	
 	//글상세페이지
-	@RequestMapping("/musicDetail")
+	@GetMapping("/musicDetail")
 	public String boardDetail(MusicDTO music,@RequestParam("music_idx")int music_idx,Model model) throws Exception {
 		log.info("게시글상세 페이지");
 		musicService.musicHit(music_idx);
@@ -79,13 +81,13 @@ public class MusicController {
 	}
 	
 	
-	@RequestMapping("/musicReq")
+	@GetMapping("/musicReq")
 	public String musicRequest() {
 		log.info("노래 요청 페이지");
 		return "music/music_request";
 	} 
 	
-	@RequestMapping("/musicWrite") //노래 등록
+	@PostMapping("/musicWrite") //노래 등록
 	public String musicWrite( MusicDTO music,Model model) throws Exception {
 			musicService.musicCreate(music);
         return "redirect:/musicNewest";
@@ -93,7 +95,7 @@ public class MusicController {
 	
 	
 	//글수정페이지
-	@RequestMapping("/musicUpdateP")
+	@GetMapping("/musicUpdateP")
 	public String musicUpdatePage(Model model,MusicDTO music ) throws Exception {
 		log.info("게시글수정 페이지");
 		music = musicService.musicDetail(music);
@@ -102,7 +104,7 @@ public class MusicController {
 		}
 		
 	//글수정
-	@RequestMapping("/musicUpdate")
+	@PostMapping("/musicUpdate")
 	public String musicUpdate(MusicDTO music,Model model) throws Exception {
 		musicService.musicUpdate(music);
 		return "redirect:/musicNewest";

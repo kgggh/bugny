@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +39,7 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@RequestMapping(value = "/boardList",method = RequestMethod.GET)
+	@GetMapping(value = "/boardList")
 	public String boardList(Model model,SearchCriteria cri) throws Exception{
 		Pagination pagination = new Pagination();
 		pagination.setCri(cri);
@@ -51,14 +53,14 @@ public class BoardController {
 	
 	
 	//글쓰기페이지
-	@RequestMapping("/boardWriteP")
+	@GetMapping("/boardWriteP")
 	public String board_writePage() {
 		log.info("게시글쓰기 페이지");
 		return "board/board_write";
 	}
 	
 	//글쓰기
-	@RequestMapping("/boardWrite")
+	@PostMapping("/boardWrite")
 	public String boardCreate(BoardDTO board,Model model) throws Exception {
 		boardService.boardCreate(board);
 		model.addAttribute("msg","작성완료");
@@ -68,7 +70,7 @@ public class BoardController {
 	}
 	
 	//글수정페이지
-		@RequestMapping("/boardUpdateP")
+		@GetMapping("/boardUpdateP")
 		public String board_UpdatePage(Model model,BoardDTO board) throws Exception {
 			log.info("게시글수정 페이지");
 			board = boardService.boardDetail(board);
@@ -77,7 +79,7 @@ public class BoardController {
 			}
 		
 	//글수정
-	@RequestMapping("/boardUpdate")
+		@GetMapping("/boardUpdate")
 	public String boardUpdate(BoardDTO board,Model model) throws Exception {
 		boardService.boardUpdate(board);
 		System.out.println(">>>>>>>>board" + board);
@@ -85,14 +87,14 @@ public class BoardController {
 	}
 	
 	//글삭제
-	@RequestMapping("/boardDelete")
+	@PostMapping("/boardDelete")
 	public String boardDelete(@RequestParam("board_idx") int board_idx,Model model) throws Exception {
 		boardService.boardDelete(board_idx);
 		return "redirect:/boardList";
 		}
 	
 	//글상세페이지
-	@RequestMapping("/boardDetail")
+	@GetMapping("/boardDetail")
 	public String boardDetail(BoardDTO board,@RequestParam("board_idx")int board_idx,Model model) throws Exception {
 		log.info("게시글상세 페이지");
 		boardService.boardHit(board_idx);
